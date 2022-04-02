@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@section Jumbotron{
+<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/jumbotron/">
+}
+
+<main>
+    <div class="container py-4">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <img src="~/images/Marvel.jpg" class="rounded float-end">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Explore Movies</h1>
+                <p class="col-md-8 fs-4">You can see all of movies in Vision Date and get a ticket by just registering</p>
+                <form method="get" asp-action="SignUp" asp-controller="Auth">
+                    <button class="btn btn-outline-dark" type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Change the background</h2>
+                    <p>You can find any kind of film and any kind of category you search for</p>
+                    <form method="get" asp-action="SignUp" asp-controller="Auth" asp-route-id="2">
+                        <button class="btn btn-outline-light" type="submit">Sign Up</button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-secondary text-white border rounded-3">
+                    <h2>Work</h2>
+                    <p>You can work here as a employee</p>
+                    <form method="get" asp-action="SignUp" asp-controller="Auth" asp-route-id="1">
+                        <button class="btn btn-outline-dark" type="submit">Apply for the job</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

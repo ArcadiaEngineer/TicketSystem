@@ -1,0 +1,69 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<MovieListingDto>
+
+@if (!User.Identity!.IsAuthenticated)
+{
+    @await Component.InvokeAsync("IntroducingComponent")
+    ;
+}
+else
+{
+    <div class="container my-5">
+        <table class="table table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Movie Release Date</th>
+                    <th scope="col">Movie Vision Date</th>
+                    <th scope="col">Movie Age Limit</th>
+                    <th scope="col">Movie Name</th>
+                    <th scope="col">Movie Review</th>
+                    <th scope="col">Movie IMDB</th>
+                    <th scope="col">Movie Banner</th>
+                    <th scope="col">Buy</th>
+                    @if (User.IsInRole("Employee"))
+                    {
+                        <th scope="col">Update</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@Model.IndexOf(item)</th>
+                            <td>@item.MovieReleaseTime</td>
+                            <td>@item.MovieVisionDate</td>
+                            <td>@item.MovieAgeLimit</td>
+                            <td>@item.MovieName</td>
+                            <td>@item.MovieReview</td>
+                            <td>@item.MovieIMDB</td>
+                            @{
+                                var base64 = Convert.ToBase64String(item.MovieBanner);
+                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                            }
+                            <td><img src="@imgSrc" width="80" height="80"></td>
+                            <td>
+                                <form method="get" asp-action="Buy" asp-controller="Purchase" asp-route-id="@item.MovieId">
+                                    <button class="btn btn-outline-success" type="submit">Buy</button>
+                                </form>
+                            </td>
+                            @if (User.IsInRole("Employee"))
+                            {
+                                <td>
+                                    <form method="get" asp-action="Update" asp-controller="Movie" asp-route-id="@item.MovieId">
+                                        <button class="btn btn-outline-info" type="submit">Update</button>
+                                    </form>
+                                </td>
+                            }
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+}
