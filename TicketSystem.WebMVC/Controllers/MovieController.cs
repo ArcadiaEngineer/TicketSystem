@@ -47,7 +47,7 @@ namespace TicketSystem.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(MovieCreateDto movieCreateDto, IFormFile formFile)
         {
-            var employeeId = Convert.ToInt32(User.FindFirst("Id")!.Value);
+            var employeeId = FindEmployeeId();
             movieCreateDto.EmployeeId = employeeId;
             return await this.CreateMovie(movieCreateDto, _mapper, formFile, _movieService);
         }
@@ -56,12 +56,12 @@ namespace TicketSystem.WebMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            if(id == 0)
+            if (id == 0)
             {
                 return View("GetAll");
             }
             var result = await _movieService.GetByIdAsync(id);
-            if(result.Success)
+            if (result.Success)
             {
                 var list = await _categoryService.GetAllAsync();
 
@@ -80,7 +80,7 @@ namespace TicketSystem.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(MovieUpdateDto movieUpdateDto, IFormFile formFile)
         {
-            var employeeId = Convert.ToInt32(User.FindFirst("Id")!.Value);
+            var employeeId = FindEmployeeId();
             movieUpdateDto.EmployeeId = employeeId;
             return await this.UpdateMovie(movieUpdateDto, _mapper, formFile, _movieService);
         }
@@ -89,13 +89,13 @@ namespace TicketSystem.WebMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            if(id == 0)
+            if (id == 0)
             {
                 return RedirectToAction("GetAll");
             }
 
             var result = await _movieService.GetByIdAsync(id);
-            if(result.Success)
+            if (result.Success)
             {
                 var movie = result.Data;
                 await _movieService.RemoveAsync(movie);
@@ -104,6 +104,9 @@ namespace TicketSystem.WebMVC.Controllers
             return RedirectToAction("GetAll");
 
         }
-
+        private int FindEmployeeId()
+        {
+            return Convert.ToInt32(User.FindFirst("Id")!.Value);
+        }
     }
 }

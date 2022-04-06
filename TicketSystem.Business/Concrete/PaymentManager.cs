@@ -37,6 +37,16 @@ namespace TicketSystem.Business.Concrete
             return new ErrorDataResult<List<Payment>>();
         }
 
+        public async Task<IDataResult<List<Payment>>> GetAllPaymentOfUser(int id)
+        {
+            var list = await _paymentDal.GetAllPaymentOfUser(id);
+            if (list != null)
+            {
+                return new SuccessDataResult<List<Payment>>(list);
+            }
+            return new ErrorDataResult<List<Payment>>();
+        }
+
         public async Task<IDataResult<Payment>> GetByIdAsync(int id)
         {
             var payment = await _paymentDal.GetByFilterAsync(p => p.PaymentId == id);

@@ -17,7 +17,7 @@
             <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control"  asp-for=Password placeholder="Password">
+            <input type="password" class="form-control" asp-for=Password placeholder="Password">
             <label for="floatingPassword">Password</label>
         </div>
 
@@ -33,7 +33,7 @@
                 <label class="form-check-label" for="credit">Employee</label>
             </div>
             <div class="form-check">
-                <input  name="LoginType" value="Customer" type="radio" class="form-check-input" required>
+                <input name="LoginType" value="Customer" type="radio" class="form-check-input" required>
                 <label class="form-check-label" for="debit">Customer</label>
             </div>
         </div>
@@ -44,9 +44,9 @@
             <button class="btn btn-secondary" type="submit">Sign Up</button>
         </form>
         <br />
-         <form method="get" asp-action="GetAll" asp-controller="Movie">
+        <form method="get" asp-action="GetAll" asp-controller="Movie">
             <button class="btn btn-secondary" type="submit">Return Home Page</button>
         </form>
-        
+
     </form>
 </main>

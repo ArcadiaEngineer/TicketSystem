@@ -1,11 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.FileProviders;
 using TicketSystem.Business.DependencyResolver.Autofac;
-using TicketSystem.Business.Utilities.Extentions;
 using TicketSystem.Business.Utilities.Profiles;
-using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +39,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.ConfigureCustomExceptionMiddleware();
+//app.ConfigureCustomExceptionMiddleware();
 
 //app.UseStaticFiles(new StaticFileOptions()
 //{

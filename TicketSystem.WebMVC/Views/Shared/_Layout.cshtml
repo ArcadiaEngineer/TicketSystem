@@ -45,6 +45,11 @@
                             @if (User.IsInRole("Employee"))
                             {
                                 <a class="nav-link" asp-action="Add" asp-controller="Movie">Add Movie</a>
+                                <a class="nav-link" asp-action="GetProfile" asp-controller="Employee">Profile</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-action="GetProfile" asp-controller="Customer">Profile</a>
                             }
                             <a class="nav-link" asp-action="LogOut" asp-controller="Auth">Sign Out</a>
                         }

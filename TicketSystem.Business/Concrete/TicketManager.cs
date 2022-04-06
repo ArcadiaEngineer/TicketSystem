@@ -37,6 +37,16 @@ namespace TicketSystem.Business.Concrete
             return new ErrorDataResult<List<Ticket>>();
         }
 
+        public async Task<IDataResult<List<Ticket>>> GetAllTicketOfUser(int id)
+        {
+            var list = await _ticketDal.GetAllTicketsOfUser(id);
+            if (list != null)
+            {
+                return new SuccessDataResult<List<Ticket>>(list);
+            }
+            return new ErrorDataResult<List<Ticket>>();
+        }
+
         public async Task<IDataResult<Ticket>> GetByIdAsync(int id)
         {
             var ticket = await _ticketDal.GetByFilterAsync(t => t.TicketId == id);

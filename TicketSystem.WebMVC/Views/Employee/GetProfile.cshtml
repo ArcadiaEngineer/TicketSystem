@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model EmployeeListingDto
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">@Model.EmpUserName</h1>
+            <p class="lead text-muted">Your name is @Model.EmpName</p>
+            <p class="lead text-muted">Your surname is @Model.EmpSurname</p>
+            <p class="lead text-muted">Your phone number is @Model.EmpPhoneNumber</p>
+            <p class="lead text-muted">Your address is @Model.EmpAddress</p>
+            <br />
+            <form method="get" asp-action="Update" asp-controller="Employee">
+                <button class="btn btn-outline-secondary" type="submit">Update</button>
+            </form>
+            <br />
+            <form method="get" asp-action="AddSession" asp-controller="Employee">
+                <button class="btn btn-outline-secondary" type="submit">Add Session</button>
+            </form>
+        </div>
+    </div>
+</section>
