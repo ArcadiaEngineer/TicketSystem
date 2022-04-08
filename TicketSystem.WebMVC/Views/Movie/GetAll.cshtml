@@ -26,7 +26,10 @@ else
                         <th scope="col">Movie Name</th>
                         <th scope="col">Movie IMDB</th>
                         <th scope="col">Movie Banner</th>
-                        <th scope="col">Buy</th>
+                        @if (User.IsInRole("Customer"))
+                        {
+                            <th scope="col">Buy</th>
+                        }
                         @if (User.IsInRole("Employee"))
                         {
                             <th scope="col">Update</th>
@@ -51,11 +54,14 @@ else
                                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                                 }
                                 <td><img src="@imgSrc" width="80" height="80"></td>
-                                <td>
+                                @if(User.IsInRole("Customer"))
+                                {
+                                    <td>
                                     <form method="get" asp-action="BuyTicket" asp-controller="Customer" asp-route-id=@item.MovieId>
                                         <button class="btn btn-outline-danger" type="submit">Buy Ticket</button>
                                     </form>
                                 </td>
+                                }
                                 @if (User.IsInRole("Employee"))
                                 {
                                     <td>

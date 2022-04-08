@@ -10,6 +10,12 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework
         {
             optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=TicketSystem;Trusted_Connection=True;");
 
+            //optionsBuilder.UseSqlServer(@"
+            //      Server=127.0.0.1,1433;
+            //      Database=TicketSystem;
+            //      User Id=sa;
+            //      Password=your**password");
+
 
             base.OnConfiguring(optionsBuilder);
         }
