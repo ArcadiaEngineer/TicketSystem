@@ -61,8 +61,8 @@ namespace TicketSystem.Business.Concrete
                         if (customerResult.Data != null && loginDto.Password == customerResult.Data.Password)
                         {
                             var claims = new List<Claim>();
-                            claims.AddEmail(customerResult.Data.Email);
-                            claims.AddName(customerResult.Data.Name);
+                            claims.AddEmail(customerResult.Data.Email!);
+                            claims.AddName(customerResult.Data.Name!);
                             claims.Add(new Claim("Id", customerResult.Data.CustomerId.ToString()));
                             claims.AddNameIdentifier(customerResult.Data.Name + customerResult.Data.Surname);
                             claims.AddRoles(new string[] { "Customer" });
@@ -76,9 +76,9 @@ namespace TicketSystem.Business.Concrete
                         if (employeeResult.Data != null && loginDto.Password == employeeResult.Data.EmpPassword)
                         {
                             var claims = new List<Claim>();
-                            claims.AddEmail(employeeResult.Data.EmpEmail);
+                            claims.AddEmail(employeeResult.Data.EmpEmail!);
+                            claims.AddName(employeeResult.Data.EmpName!);
                             claims.Add(new Claim("Id", employeeResult.Data.EmpoyeeId.ToString()));
-                            claims.AddName(employeeResult.Data.EmpName);
                             claims.AddNameIdentifier(employeeResult.Data.EmpName + employeeResult.Data.EmpSurname);
                             claims.AddRoles(new string[] { "Employee" });
                             return new SuccessDataResult<List<Claim>>(claims);

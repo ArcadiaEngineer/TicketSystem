@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TicketSystem.Business.Abstract;
+using TicketSystem.Core.Concrete.Entities.Enums;
 using TicketSystem.Entities.Dtos;
 using TicketSystem.WebMVC.Utilities.Extentions;
 
@@ -43,7 +44,7 @@ namespace TicketSystem.WebMVC.Controllers
         [HttpGet]
         public IActionResult SignUp(int id)
         {
-            ViewData["RegisterType"] = id;
+            ViewData["RegisterType"] = id == 0 ? (int)UserTypes.Customer : (int)UserTypes.Employee;
             return View(new UserCreateDto());
         }
 

@@ -19,6 +19,29 @@ namespace TicketSystem.WebMVC.Utilities.Extentions
             }
             return controller.RedirectToAction("Update");
         }
+        public static async Task<IActionResult> BuyTicket(this ControllerBase controllerBase, BuyTicketDto buyTicketDto, int customerId, ITicketService ticketService, ISeatService seatService, ISessionService sessionService)
+        {
+            var result = await sessionService.CheckSeat(buyTicketDto.SessionId, buyTicketDto.SeatNumber);
+            if(!result.Success)
+            {
+                return controllerBase.RedirectToAction("GetAll", "Movie");
+            }
+            var session = await sessionService.GetByIdAsync(buyTicketDto.SessionId);
+            Seat seat = new Seat { SceneId = session.Data.SceneId, SeatNumber = buyTicketDto.SeatNumber , SessionId = buyTicketDto.SessionId };
+            var seatResult = await seatService.CreateAsync(seat);
+
+            if(seatResult.Success)
+            {
+                Ticket ticket = new Ticket { SessionId = session.Data.SessionId, Price = buyTicketDto.Price, CustomerId = customerId ,AdultNum = 0 , StudentNum = 0};
+                var ticketResult = await ticketService.CreateAsync(ticket);
+                if(ticketResult.Success)
+                {
+                    return controllerBase.RedirectToAction("GetProfile");
+                }
+            }
+
+            return controllerBase.RedirectToAction("GetAll", "Movie");
+        }
 
     }
 }

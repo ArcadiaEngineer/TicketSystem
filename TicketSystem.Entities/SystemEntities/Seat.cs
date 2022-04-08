@@ -8,6 +8,6 @@ namespace TicketSystem.Entities.SystemEntities
         public int SceneId { get; set; }
         public Scene? Scene { get; set; }
         public int SeatNumber { get; set; }
-        public int SeatRow { get; set; }
+        public int SessionId { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TicketSystem.Business.Abstract;
 using TicketSystem.Entities.Dtos;
 using TicketSystem.WebMVC.Utilities.Extentions;
@@ -11,12 +12,18 @@ namespace TicketSystem.WebMVC.Controllers
     public class CustomerController : Controller
     {
         ICustomerService _customerService;
+        ISessionService _sessionService;
         IMapper _mapper;
+        ITicketService _ticketService;
+        ISeatService _seatService;
 
-        public CustomerController(ICustomerService customerService, IMapper mapper)
+        public CustomerController(ICustomerService customerService, IMapper mapper, ISessionService sessionService, ITicketService ticketService, ISeatService seatService)
         {
             _customerService = customerService;
             _mapper = mapper;
+            _sessionService = sessionService;
+            _ticketService = ticketService;
+            _seatService = seatService;
         }
 
         public async Task<IActionResult> GetProfile()
@@ -50,10 +57,25 @@ namespace TicketSystem.WebMVC.Controllers
             var customerId = FindCustomerId();
             return await this.UpdateUserAsync(_customerService, _mapper, customerUpdateDto, customerId);
         }
-
-        private int FindCustomerId()
+        public async Task<IActionResult> BuyTicket(int id)
         {
-            return Convert.ToInt32(User.FindFirst("Id")!.Value);
+            var sessions = await _sessionService.GetAllSessionsOfMovieAsync(id);
+
+            if (sessions.Success)
+            {
+                ViewBag.Sessions = new SelectList(sessions.Data, "SessionId", "SessionTime");
+                ViewBag.Seats = new SelectList(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+                return View(new BuyTicketDto());
+            }
+            return RedirectToAction("GetAll", "Movie");
         }
+        [HttpPost]
+        public async Task<IActionResult> BuyTicket(BuyTicketDto buyTicketDto)
+        {
+            int customerId = FindCustomerId();
+            return await this.BuyTicket(buyTicketDto, customerId, _ticketService, _seatService, _sessionService);
+        }
+
+        private int FindCustomerId() => Convert.ToInt32(User.FindFirst("Id")!.Value);
     }
 }

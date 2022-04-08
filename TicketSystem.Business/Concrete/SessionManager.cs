@@ -10,10 +10,28 @@ namespace TicketSystem.Business.Concrete
     public class SessionManager : ISessionService
     {
         readonly ISessionDal _seesionDal;
+        readonly ISceneService _sceneService;
 
-        public SessionManager(ISessionDal seesionDal)
+        public SessionManager(ISessionDal seesionDal, ISceneService sceneService)
         {
             _seesionDal = seesionDal;
+            _sceneService = sceneService;
+        }
+
+        public async Task<IResult> CheckSeat(int sessionId, int seatNumber)
+        {
+            var session = await _seesionDal.GetByFilterAsync(s => s.SessionId == sessionId);
+            if(session != null)
+            {
+                var scene = await _sceneService.GetSceneWithDetailAsync(session.SceneId);
+                if(scene != null && scene.Data.Seats != null)
+                {
+                    var result = scene.Data.Seats.Any(s => s.SessionId == session.SessionId && s.SeatNumber == seatNumber);
+                    if (result)
+                        return new ErrorResult();
+                }
+            }
+            return new SuccessResult();
         }
 
         [ValidationAspect(typeof(SessionValidationRules))]
@@ -33,6 +51,16 @@ namespace TicketSystem.Business.Concrete
             if (list != null)
             {
                 return new SuccessDataResult<List<Session>>(list);
+            }
+            return new ErrorDataResult<List<Session>>();
+        }
+
+        public async Task<IDataResult<List<Session>>> GetAllSessionsOfMovieAsync(int id)
+        {
+            var result = await _seesionDal.GetAllAsync(s => s.MovieId == id);
+            if (result != null)
+            {
+                return new SuccessDataResult<List<Session>>(result);
             }
             return new ErrorDataResult<List<Session>>();
         }

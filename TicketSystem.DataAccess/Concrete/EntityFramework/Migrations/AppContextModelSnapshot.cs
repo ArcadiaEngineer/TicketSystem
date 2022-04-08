@@ -207,7 +207,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                             EmpoyeeId = 1,
                             CinemaId = 1,
                             EmpAddress = "Ankara",
-                            EmpBirthDate = new DateTime(2022, 5, 8, 14, 26, 2, 674, DateTimeKind.Local).AddTicks(5010),
+                            EmpBirthDate = new DateTime(2022, 5, 8, 18, 42, 18, 521, DateTimeKind.Local).AddTicks(5463),
                             EmpEmail = "sncr.@html.com",
                             EmpName = "Ismail",
                             EmpPassword = "Admin",
@@ -366,12 +366,15 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                     b.Property<int>("SeatNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("SeatRow")
+                    b.Property<int>("SessionId")
                         .HasColumnType("int");
 
                     b.HasKey("SeatId");
 
                     b.HasIndex("SceneId");
+
+                    b.HasIndex("SessionId", "SeatNumber")
+                        .IsUnique();
 
                     b.ToTable("Seats");
                 });

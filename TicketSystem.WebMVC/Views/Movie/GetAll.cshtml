@@ -52,20 +52,20 @@ else
                                 }
                                 <td><img src="@imgSrc" width="80" height="80"></td>
                                 <td>
-                                    <form method="get" asp-action="Buy" asp-controller="Purchase" asp-route-id="@item.MovieId">
+                                    <form method="get" asp-action="BuyTicket" asp-controller="Customer" asp-route-id=@item.MovieId>
                                         <button class="btn btn-outline-danger" type="submit">Buy Ticket</button>
                                     </form>
                                 </td>
                                 @if (User.IsInRole("Employee"))
                                 {
                                     <td>
-                                        <form method="get" asp-action="Update" asp-controller="Movie" asp-route-id="@item.MovieId">
+                                        <form method="get" asp-action="Update" asp-controller="Movie" asp-route-id=@item.MovieId>
                                             <button class="btn btn-outline-info" type="submit">Update Movie</button>
                                         </form>
                                     </td>
                                 }
                                 <td>
-                                    <form method="get" asp-action="MovieDetail" asp-controller="Movie" asp-route-id="@item.MovieId">
+                                    <form method="get" asp-action="MovieDetail" asp-controller="Movie" asp-route-id=@item.MovieId>
                                         <button class="btn btn-outline-danger" type="submit">See Movie Detail</button>
                                     </form>
                                 </td>

@@ -2,10 +2,10 @@
 
 namespace TicketSystem.Entities.Dtos
 {
-    public class SeatCreateDto : IDto
+    public class BuyTicketDto : IDto
     {
-        public int SceneId { get; set; }
         public int SeatNumber { get; set; }
         public int SessionId { get; set; }
+        public int Price { get; set; }
     }
 }

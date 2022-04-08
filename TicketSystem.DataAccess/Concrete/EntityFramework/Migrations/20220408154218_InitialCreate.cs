@@ -164,7 +164,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SceneId = table.Column<int>(type: "int", nullable: false),
                     SeatNumber = table.Column<int>(type: "int", nullable: false),
-                    SeatRow = table.Column<int>(type: "int", nullable: false)
+                    SessionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -253,7 +253,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "EmpoyeeId", "CinemaId", "EmpAddress", "EmpBirthDate", "EmpEmail", "EmpName", "EmpPassword", "EmpPhoneNumber", "EmpSurname", "EmpUserName" },
-                values: new object[] { 1, 1, "Ankara", new DateTime(2022, 5, 8, 14, 26, 2, 674, DateTimeKind.Local).AddTicks(5010), "sncr.@html.com", "Ismail", "Admin", "0534543123", "Bal", "Admin" });
+                values: new object[] { 1, 1, "Ankara", new DateTime(2022, 5, 8, 18, 42, 18, 521, DateTimeKind.Local).AddTicks(5463), "sncr.@html.com", "Ismail", "Admin", "0534543123", "Bal", "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Scenes",
@@ -294,6 +294,12 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 name: "IX_Seats_SceneId",
                 table: "Seats",
                 column: "SceneId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Seats_SessionId_SeatNumber",
+                table: "Seats",
+                columns: new[] { "SessionId", "SeatNumber" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sessions_MovieId",

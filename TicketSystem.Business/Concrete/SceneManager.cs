@@ -48,6 +48,16 @@ namespace TicketSystem.Business.Concrete
             return new ErrorDataResult<Scene>();
         }
 
+        public async Task<IDataResult<Scene>> GetSceneWithDetailAsync(int id)
+        {
+            var result = await _sceneDal.GetSceneWithSeatsAndSessions(id);
+            if (result != null)
+            {
+                return new SuccessDataResult<Scene>(result);
+            }
+            return new ErrorDataResult<Scene>();
+        }
+
         public async Task<IResult> RemoveAsync(Scene scene)
         {
             _sceneDal.Remove(scene);

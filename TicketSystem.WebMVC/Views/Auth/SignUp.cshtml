@@ -5,7 +5,7 @@
         <p class="lead">You can sign up easly by just filling out the form.</p>
     </div>
     <h4 class="mb-3">User Information</h4>
-    <form class="needs-validation" method="post" asp-action="SignUp" asp-controller="Auth" asp-route-id="@ViewData["RegisterType"]" novalidate>
+    <form class="needs-validation" method="post" asp-action="SignUp" asp-controller="Auth" asp-route-id=@ViewData["RegisterType"] novalidate>
         <div class="">
             <div class="col-sm-10">
                 <label asp-for="Username" class="form-label">UserName</label>

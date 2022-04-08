@@ -9,8 +9,7 @@ namespace TicketSystem.Business.Utilities.ValidationRules
         {
             RuleFor(s => s.SceneId).NotEmpty().NotNull().GreaterThanOrEqualTo(1);
             RuleFor(s => s.SeatNumber).NotEmpty().NotNull().GreaterThanOrEqualTo(0);
-            RuleFor(s => s.SeatRow).NotEmpty().NotNull().GreaterThanOrEqualTo(0);
-
+            RuleFor(s => s.SessionId).NotEmpty().NotNull().GreaterThanOrEqualTo(0);
         }
     }
 }

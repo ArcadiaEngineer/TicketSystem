@@ -58,7 +58,7 @@ namespace TicketSystem.WebMVC.Controllers
             var sessionResult = await _sessionService.CreateAsync(session);
             if (sessionResult.Success)
             {
-                return View("GetAll", "Movie");
+                return RedirectToAction("GetAll", "Movie");
             }
             return View("AddSession");
         }
