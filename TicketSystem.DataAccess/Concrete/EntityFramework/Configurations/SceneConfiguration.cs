@@ -17,9 +17,25 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(s => s.SceneType).HasMaxLength(10);
 
             builder.HasKey(s => s.SceneId);
-            builder.HasOne(s => s.Cinema).WithMany(c => c.Scenes).HasForeignKey(s => s.SceneId);
+            builder.HasOne(s => s.Cinema).WithMany(c => c.Scenes).HasForeignKey(s => s.CinemaId);
 
             builder.HasMany(sc => sc.Seats).WithOne(s => s.Scene).OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(sc => sc.Sessions).WithOne(s => s.Scene).OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasData(new Scene
+            {
+                SceneId = 1,
+                SceneName = "543",
+                CinemaId = 1,
+                SceneType = "Three-D"
+            },
+            new Scene
+            {
+                SceneId = 2,
+                SceneName = "761",
+                CinemaId = 1,
+                SceneType = "Normal"
+            });
         }
     }
 }

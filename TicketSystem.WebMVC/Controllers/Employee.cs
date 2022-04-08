@@ -16,13 +16,15 @@ namespace TicketSystem.WebMVC.Controllers
         IMapper _mapper;
         IMovieService _movieService;
         IEmployeeService _employeeService;
+        ISceneService _sceneService;
 
-        public Employee(IMapper mapper, ISessionService sessionService, IMovieService movieService, IEmployeeService employeeService)
+        public Employee(IMapper mapper, ISessionService sessionService, IMovieService movieService, IEmployeeService employeeService, ISceneService sceneService)
         {
             _mapper = mapper;
             _sessionService = sessionService;
             _movieService = movieService;
             _employeeService = employeeService;
+            _sceneService = sceneService;
         }
 
         public async Task<IActionResult> GetProfile()
@@ -41,9 +43,11 @@ namespace TicketSystem.WebMVC.Controllers
         public async Task<IActionResult> AddSession()
         {
             var moviesResult = await _movieService.GetAllAsync();
-            if (moviesResult.Success)
+            var sceneResult = await _sceneService.GetAllAsync();
+            if (moviesResult.Success && sceneResult.Success)
             {
-                ViewBag.Categories = new SelectList(moviesResult.Data, "MovieId", "MovieName");
+                ViewBag.Movies = new SelectList(moviesResult.Data, "MovieId", "MovieName");
+                ViewBag.Scenes = new SelectList(sceneResult.Data, "SceneId", "SceneName");
             }
             return View(new SessionCreateDto());
         }

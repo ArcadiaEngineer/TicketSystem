@@ -10,5 +10,6 @@ namespace TicketSystem.Entities.SystemEntities
         public string? SceneName { get; set; }
         public string? SceneType { get; set; }
         public List<Seat>? Seats { get; set; }
+        public List<Session>? Sessions { get; set; }
     }
 }

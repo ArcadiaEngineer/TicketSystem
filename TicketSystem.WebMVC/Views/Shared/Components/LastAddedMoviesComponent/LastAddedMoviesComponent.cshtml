@@ -21,7 +21,7 @@
                         <hr class="my-1">
                         @if ((item.MovieVisionDate - DateTime.Now).Days > 0)
                         {
-                            <small class="fw-light">The movie @((item.MovieVisionDate - DateTime.Now).Days) remains to Vision Date</small>
+                            <small class="fw-light">For the movie @((item.MovieVisionDate - DateTime.Now).Days) day remains to Vision Date</small>
                         }
                         else
                         {
@@ -47,7 +47,7 @@
                     <hr class="my-1">
                     @if ((Model[i].MovieVisionDate - DateTime.Now).Days > 0)
                     {
-                        <small class="fw-light">The movie @((Model[i].MovieVisionDate - DateTime.Now).Days) remains to Vision Date</small>
+                        <small class="fw-light">For the movie @((Model[i].MovieVisionDate - DateTime.Now).Days) day remains to Vision Date</small>
                     }
                     else
                     {

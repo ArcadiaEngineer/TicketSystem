@@ -9,6 +9,5 @@ namespace TicketSystem.Entities.SystemEntities
         public Scene? Scene { get; set; }
         public int SeatNumber { get; set; }
         public int SeatRow { get; set; }
-        public List<Ticket>? Tickets { get; set; }
     }
 }

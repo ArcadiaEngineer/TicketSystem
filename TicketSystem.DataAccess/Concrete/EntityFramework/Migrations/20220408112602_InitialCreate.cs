@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
 {
-    public partial class IntialCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -85,7 +86,8 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 name: "Scenes",
                 columns: table => new
                 {
-                    SceneId = table.Column<int>(type: "int", nullable: false),
+                    SceneId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CinemaId = table.Column<int>(type: "int", nullable: false),
                     SceneName = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     SceneType = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
@@ -94,8 +96,8 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 {
                     table.PrimaryKey("PK_Scenes", x => x.SceneId);
                     table.ForeignKey(
-                        name: "FK_Scenes_Cinemas_SceneId",
-                        column: x => x.SceneId,
+                        name: "FK_Scenes_Cinemas_CinemaId",
+                        column: x => x.CinemaId,
                         principalTable: "Cinemas",
                         principalColumn: "CinemaId");
                 });
@@ -181,6 +183,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                     SessionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MovieId = table.Column<int>(type: "int", nullable: false),
+                    SceneId = table.Column<int>(type: "int", nullable: false),
                     SessionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SessionHour = table.Column<int>(type: "int", maxLength: 5, nullable: false)
                 },
@@ -192,15 +195,20 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                         column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "MovieId");
+                    table.ForeignKey(
+                        name: "FK_Sessions_Scenes_SceneId",
+                        column: x => x.SceneId,
+                        principalTable: "Scenes",
+                        principalColumn: "SceneId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
-                    TicketId = table.Column<int>(type: "int", nullable: false),
+                    TicketId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     SessionId = table.Column<int>(type: "int", nullable: false),
-                    SeatId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     StudentNum = table.Column<int>(type: "int", nullable: false),
                     AdultNum = table.Column<int>(type: "int", nullable: false),
@@ -210,18 +218,13 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 {
                     table.PrimaryKey("PK_Tickets", x => x.TicketId);
                     table.ForeignKey(
-                        name: "FK_Tickets_Customers_TicketId",
-                        column: x => x.TicketId,
+                        name: "FK_Tickets_Customers_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "CustomerId");
                     table.ForeignKey(
-                        name: "FK_Tickets_Seats_TicketId",
-                        column: x => x.TicketId,
-                        principalTable: "Seats",
-                        principalColumn: "SeatId");
-                    table.ForeignKey(
-                        name: "FK_Tickets_Sessions_TicketId",
-                        column: x => x.TicketId,
+                        name: "FK_Tickets_Sessions_SessionId",
+                        column: x => x.SessionId,
                         principalTable: "Sessions",
                         principalColumn: "SessionId",
                         onDelete: ReferentialAction.Cascade);
@@ -250,7 +253,17 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "EmpoyeeId", "CinemaId", "EmpAddress", "EmpBirthDate", "EmpEmail", "EmpName", "EmpPassword", "EmpPhoneNumber", "EmpSurname", "EmpUserName" },
-                values: new object[] { 1, 1, "Ankara", new DateTime(2022, 4, 27, 1, 16, 57, 22, DateTimeKind.Local).AddTicks(3025), "sncr.@html.com", "Ismail", "Admin", "0534543123", "Bal", "Admin" });
+                values: new object[] { 1, 1, "Ankara", new DateTime(2022, 5, 8, 14, 26, 2, 674, DateTimeKind.Local).AddTicks(5010), "sncr.@html.com", "Ismail", "Admin", "0534543123", "Bal", "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "Scenes",
+                columns: new[] { "SceneId", "CinemaId", "SceneName", "SceneType" },
+                values: new object[] { 1, 1, "543", "Three-D" });
+
+            migrationBuilder.InsertData(
+                table: "Scenes",
+                columns: new[] { "SceneId", "CinemaId", "SceneName", "SceneType" },
+                values: new object[] { 2, 1, "761", "Normal" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_CinemaId",
@@ -273,6 +286,11 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Scenes_CinemaId",
+                table: "Scenes",
+                column: "CinemaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Seats_SceneId",
                 table: "Seats",
                 column: "SceneId");
@@ -281,6 +299,21 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 name: "IX_Sessions_MovieId",
                 table: "Sessions",
                 column: "MovieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sessions_SceneId",
+                table: "Sessions",
+                column: "SceneId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_CustomerId",
+                table: "Tickets",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_SessionId",
+                table: "Tickets",
+                column: "SessionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -289,22 +322,22 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 name: "Payments");
 
             migrationBuilder.DropTable(
+                name: "Seats");
+
+            migrationBuilder.DropTable(
                 name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Seats");
-
-            migrationBuilder.DropTable(
                 name: "Sessions");
 
             migrationBuilder.DropTable(
-                name: "Scenes");
+                name: "Movies");
 
             migrationBuilder.DropTable(
-                name: "Movies");
+                name: "Scenes");
 
             migrationBuilder.DropTable(
                 name: "Categories");

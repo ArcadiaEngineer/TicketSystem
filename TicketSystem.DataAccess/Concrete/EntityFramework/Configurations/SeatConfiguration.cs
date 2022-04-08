@@ -15,7 +15,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Configurations
             builder.HasKey(s => s.SeatId);
             builder.HasOne(s => s.Scene).WithMany(sc => sc.Seats).HasForeignKey(s => s.SceneId);
 
-            builder.HasMany(s => s.Tickets).WithOne(t => t.Seat).IsRequired(false).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -15,9 +15,8 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(t => t.Price).HasColumnType("money");
 
             builder.HasKey(t => t.TicketId);
-            builder.HasOne(t => t.Customer).WithMany(c => c.Tickets).HasForeignKey(t => t.TicketId);
-            builder.HasOne(t => t.Session).WithMany(s => s.Tickets).HasForeignKey(t => t.TicketId);
-            builder.HasOne(t => t.Seat).WithMany(s => s.Tickets).HasForeignKey(t => t.TicketId);
+            builder.HasOne(t => t.Customer).WithMany(c => c.Tickets).HasForeignKey(t => t.CustomerId);
+            builder.HasOne(t => t.Session).WithMany(s => s.Tickets).HasForeignKey(t => t.SessionId);
 
         }
     }
