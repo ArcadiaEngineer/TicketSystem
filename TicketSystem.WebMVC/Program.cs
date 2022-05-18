@@ -39,13 +39,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-//app.ConfigureCustomExceptionMiddleware();
-
-//app.UseStaticFiles(new StaticFileOptions()
-//{
-//    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "WebFolders")),
-//    RequestPath = "/WebFolders"
-//});
 
 app.UseStaticFiles();
 
