@@ -65,7 +65,7 @@ namespace TicketSystem.WebMVC.Controllers
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("GetAll", "Movie");
+            return RedirectToAction("Index", "Home");
         }
 
         private async Task ConfigureCookie(List<Claim> claims, bool rememberMe = false)

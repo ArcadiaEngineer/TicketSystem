@@ -29,6 +29,11 @@ namespace TicketSystem.WebMVC.Controllers
             return this.List<MovieListingDto, Movie>(result, _mapper);
         }
 
+        public async Task<IActionResult> Get(int id)
+        {
+            return await Task.FromResult(View());
+        }
+
         [Authorize(Roles = "Employee")]
         [HttpGet]
         public async Task<IActionResult> Add()
