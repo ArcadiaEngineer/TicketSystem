@@ -8,7 +8,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
     public class EfMovieDal : EntityRepositoryBase<Movie, AppContext>, IMovieDal
     {
         
-        List<MovieDetailDto> IMovieDal.GetMovieDetails(int id)
+        MovieDetailDto IMovieDal.GetMovieDetails(int id)
         {
             using (AppContext context = new AppContext())
             {
@@ -27,7 +27,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
                                  MovieAgeLimit = m.MovieAgeLimit,
                                  MovieReview = m.MovieReview
                              };
-                return result.ToList();
+                return result.SingleOrDefault();
             }
         }
     }
