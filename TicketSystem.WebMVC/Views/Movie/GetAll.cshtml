@@ -1,78 +1,89 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
 @model List<MovieListingDto>
 
-<div class="row mx-0">
-    <div class="col-3  my-3 mx-0">
-        <h3>Last Added</h3>
-        @await Component.InvokeAsync("LastAddedMoviesComponent")
+<div class="section-header">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="page-header">Movies</h1>
+            </div>
+
+        </div>
+    </div> <!-- /.container -->
+</div> <!-- /.section-colored -->
+
+ <div class="container container-int">
+
+      <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">Movies</li>
+      </ol>
+    <div class="row">
+      <div class="col-lg-3">
+        <form class="ActivityForm">
+          <h3 class="searchHeader">Select type:</h3>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" style="transform: scale(1.5);">
+            <label class="form-check-label" for="defaultCheck1" style="font-weight: normal;font-size: 18px;margin-left: 10px;">
+              Comedy
+            </label>
+          </div>
+          <div class="form-group">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" style="transform: scale(1.5);">
+            <label class="form-check-label" for="defaultCheck1" style="font-weight: normal;font-size: 18px;margin-left: 10px;">
+              Dram
+            </label>
+          </div>
+          
+          
+          <h3 class="searchHeader">Select place:</h3>
+          <div class="form-group">
+            <select id="places" class="form-control">
+              <option value="aybu">AYBU</option>
+              <option value="odtu">ODTU</option>
+              <option value="gazi">GAZI UNI</option>
+              <option value="bilkent" selected>BILKENT</option>
+            </select>
+          </div>
+          <h3 class="searchHeader">Select date:</h3>
+          <div class="form-group">
+
+            <input class="form-control" type="date" name="birthday" min="2018-04-01" max="2022-04-30" required>
+            <span class="validity"></span>
+          </div>
+          <div class="form-group">
+
+            <input class="btn btn-primary" type="submit" value="Apply Filter">
+          </div>
+        </form>
+
+      </div>
+      <div class="col-lg-9">
+        @foreach (var item in Model)
+        {
+        <div class="row">
+
+          <div class="col-md-7 col-sm-7">
+            <a href="portfolio-item.html"><img class="img-responsive" src="~/images/Marvel.jpg" alt="Portfolio 1"></a>
+          </div>
+
+          <div class="col-md-5 col-sm-5">
+            <h3>Banzhow Template</h3>
+            <h4>Web Design</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar quam sed consequat adipiscing.
+            </p>
+            <a class="btn btn-primary" href="/Movie/GetMovie/@item.MovieId">Buy <i class="fa fa-angle-right"></i></a>
+          </div>
+
+        </div>
+        }
+        <hr>
+      </div>
     </div>
-    <div class="col-9 my-3">
-        <h3>All Movies</h3>
-        <table class="table table-hover table-borderless">
-            <thead class="table-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Movie Release Date</th>
-                    <th scope="col">Movie Vision Date</th>
-                    <th scope="col">Movie Age Limit</th>
-                    <th scope="col">Movie Name</th>
-                    <th scope="col">Movie IMDB</th>
-                    <th scope="col">Movie Banner</th>
-                    @if (User.IsInRole("Customer"))
-                    {
-                        <th scope="col">Buy</th>
-                    }
-                    @if (User.IsInRole("Employee"))
-                    {
-                        <th scope="col">Update</th>
-                    }
-                    <th scope="col">Detail</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model != null)
-                {
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <th scope="row">@Model.IndexOf(item)</th>
-                            <td>@item.MovieReleaseTime</td>
-                            <td>@item.MovieVisionDate</td>
-                            <td>@item.MovieAgeLimit</td>
-                            <td>@item.MovieName</td>
-                            <td>@item.MovieIMDB</td>
-                            @{
-                                var base64 = Convert.ToBase64String(item.MovieBanner!);
-                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                            }
-                            <td><img src="@imgSrc" width="80" height="80"></td>
-                            @if (User.IsInRole("Customer"))
-                            {
-                                <td>
-                                    <form method="get" asp-action="BuyTicket" asp-controller="Customer" asp-route-id=@item.MovieId>
-                                        <button class="btn btn-outline-danger" type="submit">Buy Ticket</button>
-                                    </form>
-                                </td>
-                            }
-                            @if (User.IsInRole("Employee"))
-                            {
-                                <td>
-                                    <form method="get" asp-action="Update" asp-controller="Movie" asp-route-id=@item.MovieId>
-                                        <button class="btn btn-outline-info" type="submit">Update Movie</button>
-                                    </form>
-                                </td>
-                            }
-                            <td>
-                                <form method="get" asp-action="MovieDetail" asp-controller="Movie" asp-route-id=@item.MovieId>
-                                    <button class="btn btn-outline-danger" type="submit">See Movie Detail</button>
-                                </form>
-                            </td>
-                        </tr>
-                    }
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
+
+    </div><!-- /.container -->

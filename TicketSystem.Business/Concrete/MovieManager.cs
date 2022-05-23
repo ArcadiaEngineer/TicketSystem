@@ -3,6 +3,7 @@ using TicketSystem.Business.Utilities.ValidationRules;
 using TicketSystem.Core.Aspects.Autofac;
 using TicketSystem.Core.Utilities.Results;
 using TicketSystem.DataAccess.Abstract.Dal;
+using TicketSystem.Entities.Dtos.MovieDtos;
 using TicketSystem.Entities.SystemEntities;
 
 namespace TicketSystem.Business.Concrete
@@ -37,6 +38,7 @@ namespace TicketSystem.Business.Concrete
             return new ErrorDataResult<List<Movie>>();
         }
 
+        
         public async Task<IDataResult<Movie>> GetByIdAsync(int id)
         {
             var movie = await _movieDal.GetByFilterAsync(m => m.MovieId == id);
@@ -58,6 +60,16 @@ namespace TicketSystem.Business.Concrete
         {
             var updatedMovie = _movieDal.Update(movie);
             return await Task.FromResult(new SuccessDataResult<Movie>(updatedMovie));
+        }
+
+        public IDataResult<MovieDetailDto> GetMovieDetailAsync(int id)
+        {
+            var movie =_movieDal.GetMovieDetails().SingleOrDefault();
+            if (movie != null)
+            {
+                return new SuccessDataResult<MovieDetailDto>(movie);
+            }
+            return new ErrorDataResult<MovieDetailDto>();
         }
     }
 }

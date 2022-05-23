@@ -16,7 +16,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(m => m.MovieVisionDate).IsRequired();
             builder.Property(m => m.MovieReleaseTime).IsRequired();
 
-            builder.Property(m => m.MovieBanner).IsRequired();
+            //builder.Property(m => m.MovieBanner).IsRequired();
 
             builder.Property(m => m.MovieIMDB).IsRequired(false);
             builder.Property(m => m.MovieAgeLimit).IsRequired(false);
