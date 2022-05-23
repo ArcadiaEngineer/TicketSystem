@@ -8,7 +8,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
     public class EfMovieDal : EntityRepositoryBase<Movie, AppContext>, IMovieDal
     {
         
-        MovieDetailDto IMovieDal.GetMovieDetails(int id)
+        MovieDetailDto IMovieDal.GetMovieDetail(int id)
         {
             using (AppContext context = new AppContext())
             {
@@ -23,11 +23,11 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
                                  MovieId = m.MovieId,
                                  MovieBanner = m.MovieBanner,
                                  MovieVisionDate = m.MovieVisionDate,
-                                 MovieReleaseTime = m.MovieReleaseTime,
+                                 MovieBanner=m.MovieBanner,
                                  MovieAgeLimit = m.MovieAgeLimit,
                                  MovieReview = m.MovieReview
                              };
-                return result.SingleOrDefault();
+                return result.SingleOrDefault<MovieDetailDto>();
             }
         }
     }

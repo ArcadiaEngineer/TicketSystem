@@ -64,7 +64,7 @@ namespace TicketSystem.Business.Concrete
 
         public IDataResult<MovieDetailDto> GetMovieDetailAsync(int id)
         {
-            var movie =_movieDal.GetMovieDetails(id).SingleOrDefault();
+            var movie =_movieDal.GetMovieDetail(id);
             if (movie != null)
             {
                 return new SuccessDataResult<MovieDetailDto>(movie);

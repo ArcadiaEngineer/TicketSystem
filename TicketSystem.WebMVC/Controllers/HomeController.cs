@@ -7,6 +7,7 @@ namespace TicketSystem.WebMVC.Controllers
     {
         public IActionResult Index()
         {
+           
             return View();
         }
     }

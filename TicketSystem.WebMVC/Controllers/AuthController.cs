@@ -35,9 +35,10 @@ namespace TicketSystem.WebMVC.Controllers
                 if (createResponse.Success)
                 {
                     await ConfigureCookie(createResponse.Data, rememberMe);
+                    return RedirectToAction("GetListMovies", "Movie");
                 }
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LogIn", "Auth");
         }
 
         //<param name = "id" > This id is for determine the enrolling type (Employee|Customer) </param>
