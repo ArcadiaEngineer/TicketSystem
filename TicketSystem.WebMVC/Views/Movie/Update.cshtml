@@ -2,62 +2,61 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model MovieUpdateDto
-
 <div class="container">
 
     <h1>Update Movie</h1>
+    <main role="main" class="pb-3">
+        <div class=col-md-6>
 
-    <div class=col-md-6>
+            <form asp-action="Update" method="post" asp-controller="Movie" enctype="multipart/form-data">
 
-        <form asp-action="Update" method="post" asp-controller="Movie" enctype="multipart/form-data">
+                <div class="form-group mb-3">
+                    <input asp-for="@Model.MovieId" class="form-control" type="hidden   />
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="@Model.MovieName"></label>
+                    <input asp-for="@Model.MovieName" class="form-control" />
+                    <span asp-validation-for="@Model.MovieName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label> Banner : </label>
+                    <input type="file" name="formFile" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="@Model.MovieAgeLimit"></label>
+                    <input asp-for="@Model.MovieAgeLimit" class="form-control" />
+                    <span asp-validation-for="@Model.MovieAgeLimit" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="@Model.MovieIMDB"></label>
+                    <input asp-for="@Model.MovieIMDB" class="form-control" />
+                    <span asp-validation-for="@Model.MovieIMDB" class="text-danger"></span>
+                </div>
 
-            <div class="form-group mb-3">
-                <input asp-for="@Model.MovieId" class="form-control" type="hidden />
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="@Model.MovieName"></label>
-                <input asp-for="@Model.MovieName" class="form-control" />
-                <span asp-validation-for="@Model.MovieName" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label> Banner : </label>
-                <input type="file" name="formFile" class="form-control" />
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="@Model.MovieAgeLimit"></label>
-                <input asp-for="@Model.MovieAgeLimit" class="form-control" />
-                <span asp-validation-for="@Model.MovieAgeLimit" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="@Model.MovieIMDB"></label>
-                <input asp-for="@Model.MovieIMDB" class="form-control" />
-                <span asp-validation-for="@Model.MovieIMDB" class="text-danger"></span>
-            </div>
-           
-            <div class="form-group mb-3">
-                <label asp-for="@Model.MovieVisionDate"></label>
-                <input asp-for="@Model.MovieVisionDate" class="form-control" />
-                <span asp-validation-for="@Model.MovieVisionDate" class="text-danger"></span>
-            </div>
-            
-            <div class="mb-3">
-                <label>Category :</label>
-                <select asp-for="MovieCategoryId" asp-items="@ViewBag.Categories" class="form-select">
-                </select>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="@Model.MovieReview"></label>
-                <textarea asp-for="@Model.MovieReview" class="form-control" rows="5" /></textarea>
-                <span asp-validation-for="@Model.MovieReview" class="text-danger"></span>
-            </div>
-            <hr class="my-4">
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
-        </form>
-        <form method="get" asp-action="Delete" asp-controller="Movie" asp-route-id="@Model.MovieId">
-            <button class="btn btn-outline-danger" type="submit">Delete</button>
-        </form>
-    </div>
+                <div class="form-group mb-3">
+                    <label asp-for="@Model.MovieVisionDate"></label>
+                    <input asp-for="@Model.MovieVisionDate" class="form-control" />
+                    <span asp-validation-for="@Model.MovieVisionDate" class="text-danger"></span>
+                </div>
 
+                <div class="mb-3">
+                    <label>Category :</label>
+                    <select asp-for="MovieCategoryId" asp-items="@ViewBag.Categories" class="form-select">
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="@Model.MovieReview"></label>
+                    <textarea asp-for="@Model.MovieReview" class="form-control" rows="5" /></textarea>
+                    <span asp-validation-for="@Model.MovieReview" class="text-danger"></span>
+                </div>
+                <hr class="my-4">
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+            <form method="get" asp-action="Delete" asp-controller="Movie" asp-route-id="@Model.MovieId">
+                <button class="btn btn-outline-danger" type="submit">Delete</button>
+            </form>
+        </div>
+    </main>
 </div>

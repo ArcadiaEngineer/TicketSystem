@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model List<MovieListingDto>
 
@@ -73,18 +73,6 @@
                         <form method="get" asp-action="GetMovie" asp-controller="Movie" asp-route-id=@item.MovieId>
                             <button class="btn btn-outline-danger" type="submit">See Movie Detail</button>
                         </form>
-                        @if (User.IsInRole("Customer"))
-                        {
-                            <form method="get" asp-action="BuyTicket" asp-controller="Customer" asp-route-id=@item.MovieId>
-                                <button class="btn btn-outline-danger" type="submit">Buy Ticket</button>
-                            </form>
-                        }
-                        @if (User.IsInRole("Employee"))
-                        {
-                            <form method="get" asp-action="Update" asp-controller="Movie" asp-route-id=@item.MovieId>
-                                <button class="btn btn-outline-info" type="submit">Update Movie</button>
-                            </form>
-                        }
                     </div>
 
                 </div>

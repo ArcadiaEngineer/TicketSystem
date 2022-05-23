@@ -23,11 +23,10 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
                                  MovieId = m.MovieId,
                                  MovieBanner = m.MovieBanner,
                                  MovieVisionDate = m.MovieVisionDate,
-                                 MovieBanner=m.MovieBanner,
                                  MovieAgeLimit = m.MovieAgeLimit,
                                  MovieReview = m.MovieReview
                              };
-                return result.SingleOrDefault<MovieDetailDto>();
+                return result.SingleOrDefault();
             }
         }
     }

@@ -1,14 +1,9 @@
 ﻿@{
-   
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model List<MovieListingDto>
-@if (!User.Identity!.IsAuthenticated)
-{
-    @await Component.InvokeAsync("IntroducingComponent")
-}
-else
-{
+<div class="container">
     <div class="row mx-0">
         <div class="col-3  my-3 mx-0">
             <h3>Last Added</h3>
@@ -20,21 +15,14 @@ else
                 <thead class="table-light">
                     <tr>
                         <th scope="col">#</th>
-                        
+
                         <th scope="col">Movie Vision Date</th>
                         <th scope="col">Movie Age Limit</th>
                         <th scope="col">Movie Name</th>
                         <th scope="col">Movie IMDB</th>
                         <th scope="col">Movie Banner</th>
-                        <th scope="col">Buy</th>
-                        @if (User.IsInRole("Customer"))
-                        {
-                            <th scope="col">Buy</th>
-                        }
-                        @if (User.IsInRole("Employee"))
-                        {
-                            <th scope="col">Update</th>
-                        }
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
                         <th scope="col">Detail</th>
                     </tr>
                 </thead>
@@ -45,7 +33,7 @@ else
                         {
                             <tr>
                                 <th scope="row">@Model.IndexOf(item)</th>
-                                
+
                                 <td>@item.MovieVisionDate</td>
                                 <td>@item.MovieAgeLimit</td>
                                 <td>@item.MovieName</td>
@@ -56,24 +44,17 @@ else
                                 }
                                 <td><img src="@imgSrc" width="80" height="80"></td>
                                 <td>
-                                @if(User.IsInRole("Customer"))
-                                {
-                                    <td>
-                                    <form method="get" asp-action="BuyTicket" asp-controller="Customer" asp-route-id=@item.MovieId>
-                                        <button class="btn btn-outline-danger" type="submit">Buy Ticket</button>
+                                    <form method="get" asp-action="Update" asp-controller="Movie" asp-route-id=@item.MovieId>
+                                        <button class="btn btn-outline-info" type="submit">Update Movie</button>
                                     </form>
                                 </td>
-                                }
-                                @if (User.IsInRole("Employee"))
-                                {
-                                    <td>
-                                        <form method="get" asp-action="Update" asp-controller="Movie" asp-route-id=@item.MovieId>
-                                            <button class="btn btn-outline-info" type="submit">Update Movie</button>
-                                        </form>
-                                    </td>
-                                }
                                 <td>
-                                    <form method="get" asp-action="MovieDetail" asp-controller="Movie" asp-route-id=@item.MovieId>
+                                    <form method="get" asp-action="Delete" asp-controller="Movie" asp-route-id=@item.MovieId>
+                                        <button class="btn btn-outline-info" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="get" asp-action="GetMovie" asp-controller="Movie" asp-route-id=@item.MovieId>
                                         <button class="btn btn-outline-danger" type="submit">See Movie Detail</button>
                                     </form>
                                 </td>
@@ -84,4 +65,4 @@ else
             </table>
         </div>
     </div>
-}
+</div>
