@@ -21,20 +21,21 @@
 
     <ol class="breadcrumb">
         <li><a href="/Home/">Home</a></li>
-        <li><a href="/Product/Movie">Movie</a></li>
         <li class="active">@Model.MovieName</li>
     </ol>
 
     <div class="row">
 
-
-
         <div class="col-md-8">
 
             <div class="pro-img-details">
-                <img id="large-image" class="img-responsive" src="[@Model.MovieBanner]" alt="Portfolio 1">
+                @{
+                    var base64 = Convert.ToBase64String(Model.MovieBanner!);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                <img src="@imgSrc" width="120" height="120">
             </div>
-            
+
         </div>
 
         <div class="col-md-4">
@@ -48,7 +49,6 @@
         </div>
 
     </div>
- 
+
 
 </div><!-- /.container -->
-

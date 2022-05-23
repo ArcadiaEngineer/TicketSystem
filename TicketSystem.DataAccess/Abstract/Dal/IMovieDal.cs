@@ -6,6 +6,6 @@ namespace TicketSystem.DataAccess.Abstract.Dal
 {
     public interface IMovieDal : IRepositoryDal<Movie>
     {
-        List<MovieDetailDto> GetMovieDetails();
+        List<MovieDetailDto> GetMovieDetails(int id);
     }
 }

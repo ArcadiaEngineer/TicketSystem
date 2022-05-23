@@ -7,10 +7,6 @@ namespace TicketSystem.WebMVC.Controllers
     {
         public IActionResult Index()
         {
-            if(User != null && User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("GetAll","Movie");
-            }
             return View();
         }
     }

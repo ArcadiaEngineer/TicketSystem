@@ -3,11 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Firmamızın ana iştigal konuları sterilizasyon dezenfeksiyon cihazları projelendirme, taahhüt ve inşaat dahil anahtar teslim merkezi sterilizasyon projeleri, Hastane Mobilyaları ve Tıbbi Atık imha ve nötralizasyon sistemleridir.">
-    <meta name="keywords" content="tekerlekli sandalye,transfer sandalyesi,otoklav,plazma,arıtma,dezenfeksiyon,dekontaminasyon,steril">
     <title>TicketSystem</title>
-    <link rel="shortcut icon"  href="~/img/favicon.ico">
+    <link rel="shortcut icon" href="~/img/favicon.ico">
     <!-- font-awesome -->
     <link href="~/Content/font-awesome.min.css" rel="stylesheet">
 
@@ -38,7 +35,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="index.html">TicketSystem</a>
+                <a class="navbar-brand" asp-action="GetAll" asp-controller="Movie">TicketSystem</a>
 
 
             </div>
@@ -47,10 +44,39 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li @ViewBag.Home><a href="/Home/">Home</a></li>
-                    <li @ViewBag.About><a href="/Home/About/">About Us</a></li>
-                    <li @ViewBag.About><a href="/Home/Contact/">Contact</a></li>
-                    <li @ViewBag.Product><a href="/Movie/GetAll">Movies</a></li>
-                     <li><a href="/Auth/LogIn"><i class="fa fa-user"></i><span>Login</span></a></li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" asp-action="GetAll" asp-controller="Movie">See All Movies</a>
+                    </li>
+                    @if (!User.Identity!.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="LogIn" asp-controller="Auth">Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="SignUp" asp-controller="Auth">Sign Up</a>
+                        </li>
+                    }
+                    else
+                    {
+                        @if (User.IsInRole("Employee"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Add" asp-controller="Movie">Add Movie</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="GetProfile" asp-controller="Employee">Profile</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="GetProfile" asp-controller="Customer">Profile</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="LogOut" asp-controller="Auth">Sign Out</a>
+                        </li>
+                    }
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
@@ -58,115 +84,115 @@
 
     @RenderBody()
 
-     <footer>
-      <div class="container">
+    <footer>
+        <div class="container">
 
-        <div class="row">
-          <div class="col-lg-3 col-md-3">
-            <a class="footer-brand" href="index.html">Banzhow</a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar quam sed consequat adipiscing. Sed est quam, pretium a vestibulum vel, aliquam vitae eros.</p>
-            <ul class="list-inline list-unstyled social-networks">
-              <li>
-                <a href="#">
-                  <div class="icon-social icon-social-facebook normal">
-                    <i class="fa fa-facebook"></i>
-                  </div>
-                  <div class="icon-social hover">
-                    <i class="fa fa-facebook"></i>
-                  </div>
-                </a>
-              </li>
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <a class="footer-brand" href="index.html">Banzhow</a>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar quam sed consequat adipiscing. Sed est quam, pretium a vestibulum vel, aliquam vitae eros.</p>
+                    <ul class="list-inline list-unstyled social-networks">
+                        <li>
+                            <a href="#">
+                                <div class="icon-social icon-social-facebook normal">
+                                    <i class="fa fa-facebook"></i>
+                                </div>
+                                <div class="icon-social hover">
+                                    <i class="fa fa-facebook"></i>
+                                </div>
+                            </a>
+                        </li>
 
-              <li>
-                <a href="#">
-                  <div class="icon-social icon-social-twitter normal">
-                    <i class="fa fa-twitter"></i>
-                  </div>
-                  <div class="icon-social hover">
-                    <i class="fa fa-twitter"></i>
-                  </div>
-                </a>
-              </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon-social icon-social-twitter normal">
+                                    <i class="fa fa-twitter"></i>
+                                </div>
+                                <div class="icon-social hover">
+                                    <i class="fa fa-twitter"></i>
+                                </div>
+                            </a>
+                        </li>
 
-              <li>
-                <a href="#">
-                  <div class="icon-social icon-social-google-plus normal">
-                    <i class="fa fa-google-plus"></i>
-                  </div>
-                  <div class="icon-social hover">
-                    <i class="fa fa-google-plus"></i>
-                  </div>
-                </a>
-              </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon-social icon-social-google-plus normal">
+                                    <i class="fa fa-google-plus"></i>
+                                </div>
+                                <div class="icon-social hover">
+                                    <i class="fa fa-google-plus"></i>
+                                </div>
+                            </a>
+                        </li>
 
-              <li>
-                <a href="#">
-                  <div class="icon-social icon-social-youtube normal">
-                    <i class="fa fa-youtube-play"></i>
-                  </div>
-                  <div class="icon-social hover">
-                    <i class="fa fa-youtube-play"></i>
-                  </div>
-                </a>
-              </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon-social icon-social-youtube normal">
+                                    <i class="fa fa-youtube-play"></i>
+                                </div>
+                                <div class="icon-social hover">
+                                    <i class="fa fa-youtube-play"></i>
+                                </div>
+                            </a>
+                        </li>
 
-              <li>
-                <a href="#">
-                  <div class="icon-social icon-social-linkedin normal">
-                    <i class="fa fa-linkedin"></i>
-                  </div>
-                  <div class="icon-social hover">
-                    <i class="fa fa-linkedin"></i>
-                  </div>
-                </a>
-              </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon-social icon-social-linkedin normal">
+                                    <i class="fa fa-linkedin"></i>
+                                </div>
+                                <div class="icon-social hover">
+                                    <i class="fa fa-linkedin"></i>
+                                </div>
+                            </a>
+                        </li>
 
-              <li>
-                <a href="#">
-                  <div class="icon-social icon-social-pinterest normal">
-                    <i class="fa fa-pinterest"></i>
-                  </div>
-                  <div class="icon-social hover">
-                    <i class="fa fa-pinterest"></i>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-3 col-md-3">
-            <h3>CONTACT</h3>
-            <address>
-              <i class="fa fa-map-marker"></i> 123 My Street, Banzhow City, CA 4567<br>
-              <i class="fa fa-phone"></i> (123) 456-7890<br>
-              <i class="fa fa-envelope"></i> info@banzhow.com
-            </address>
-          </div>
-          
-          <div class="col-lg-3 col-md-3">
-            <h3>LATEST TWEETS</h3>
-            <ul class="latest-tweets">
-              <li>
-                <i class="fa fa-twitter"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar quam sed consequat adipiscing
-              </li>
-              <li>
-                <i class="fa fa-twitter"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar quam sed consequat adipiscing
-              </li>
-            </ul>
-          </div>
+                        <li>
+                            <a href="#">
+                                <div class="icon-social icon-social-pinterest normal">
+                                    <i class="fa fa-pinterest"></i>
+                                </div>
+                                <div class="icon-social hover">
+                                    <i class="fa fa-pinterest"></i>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <h3>CONTACT</h3>
+                    <address>
+                        <i class="fa fa-map-marker"></i> 123 My Street, Banzhow City, CA 4567<br>
+                        <i class="fa fa-phone"></i> (123) 456-7890<br>
+                        <i class="fa fa-envelope"></i> info@banzhow.com
+                    </address>
+                </div>
 
-          <div class="col-lg-3 col-md-3">
-            <h3>NEWSLETTER</h3>
-            <p>Type your email address below and subscribe to our newsletter</p>
-            <div class="input-group">
-              <input type="text" placeholder="Email" class="form-control">
-              <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">Go!</button>
-              </span>
-            </div><!-- /input-group -->
-          </div>
-        </div><!-- /.row -->
+                <div class="col-lg-3 col-md-3">
+                    <h3>LATEST TWEETS</h3>
+                    <ul class="latest-tweets">
+                        <li>
+                            <i class="fa fa-twitter"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar quam sed consequat adipiscing
+                        </li>
+                        <li>
+                            <i class="fa fa-twitter"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar quam sed consequat adipiscing
+                        </li>
+                    </ul>
+                </div>
 
-      </div><!-- /.container -->
+                <div class="col-lg-3 col-md-3">
+                    <h3>NEWSLETTER</h3>
+                    <p>Type your email address below and subscribe to our newsletter</p>
+                    <div class="input-group">
+                        <input type="text" placeholder="Email" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">Go!</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div>
+            </div><!-- /.row -->
+
+        </div><!-- /.container -->
     </footer>
 
     <div class="footer-after">

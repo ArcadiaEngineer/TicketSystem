@@ -14,28 +14,49 @@ namespace TicketSystem.WebMVC.Controllers
         IMovieService _movieService;
         IMapper _mapper;
         ICategoryService _categoryService;
+        ICinemaService _cinemaService;
 
-        public MovieController(IMovieService movieService, IMapper mapper, ICategoryService categoryService)
+        public MovieController(IMovieService movieService, IMapper mapper, ICategoryService categoryService, ICinemaService cinemaService)
         {
             _movieService = movieService;
             _mapper = mapper;
             _categoryService = categoryService;
+            _cinemaService = cinemaService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            
+            var categories = await _categoryService.GetAllAsync();
+
+            if (categories.Success)
+            {
+                ViewBag.Categories = new SelectList(categories.Data, "CategoryId", "CategoryName");
+            }
+
+            var cinemas = await _cinemaService.GetAllAsync();
+
+            if (cinemas.Success)
+            {
+                ViewBag.Cinemas = new SelectList(cinemas.Data, "CinemaId", "CinemaAddress");
+            }
+
             var result = await _movieService.GetAllAsync();
             return this.List<MovieListingDto, Movie>(result, _mapper);
         }
 
-        
-        [Route("Movie/GetMovie/{id}")]
         public IActionResult GetMovie(int id)
         {
             var result = _movieService.GetMovieDetailAsync(id);
             return View(result.Data);
         }
+
+        //[HttpPost]
+        //public IActionResult GetMoviesByFiltered(int categoryId, int cinemaId)
+        //{
+            //filtrelenmiş movie list gelecek
+        //}
 
         [Authorize(Roles = "Employee")]
         [HttpGet]
