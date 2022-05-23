@@ -29,9 +29,12 @@ namespace TicketSystem.WebMVC.Controllers
             return this.List<MovieListingDto, Movie>(result, _mapper);
         }
 
-        public async Task<IActionResult> Get(int id)
+        
+        [Route("Movie/GetMovie/{id}")]
+        public IActionResult GetMovie(int id)
         {
-            return await Task.FromResult(View());
+            var result = _movieService.GetMovieDetailAsync(id);
+            return View(result.Data);
         }
 
         [Authorize(Roles = "Employee")]

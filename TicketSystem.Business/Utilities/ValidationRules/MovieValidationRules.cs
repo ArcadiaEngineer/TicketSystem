@@ -12,8 +12,8 @@ namespace TicketSystem.Business.Utilities.ValidationRules
             RuleFor(m => m.MovieName).NotEmpty();
             RuleFor(m => m.MovieReleaseTime).NotEmpty().NotNull();
             RuleFor(m => m.MovieVisionDate).NotEmpty().NotNull();
-            RuleFor(m => m.MovieBanner).NotEmpty().NotNull();
-            RuleFor(m => m.MovieAgeLimit).NotEmpty().NotNull().GreaterThanOrEqualTo(0);
+            //RuleFor(m => m.MovieBanner).NotEmpty().NotNull();
+            //RuleFor(m => m.MovieAgeLimit).NotEmpty().NotNull().GreaterThanOrEqualTo(0);
         }
     }
 }
