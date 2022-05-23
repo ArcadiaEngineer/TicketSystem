@@ -33,21 +33,22 @@
                 <input asp-for="@Model.MovieIMDB" class="form-control" />
                 <span asp-validation-for="@Model.MovieIMDB" class="text-danger"></span>
             </div>
-            <div class="form-group mb-3">
-                <label asp-for="@Model.MovieReleaseTime"></label>
-                <input asp-for="@Model.MovieReleaseTime" class="form-control" />
-                <span asp-validation-for="@Model.MovieReleaseTime" class="text-danger"></span>
-            </div>
+           
             <div class="form-group mb-3">
                 <label asp-for="@Model.MovieVisionDate"></label>
                 <input asp-for="@Model.MovieVisionDate" class="form-control" />
                 <span asp-validation-for="@Model.MovieVisionDate" class="text-danger"></span>
             </div>
-
+            
             <div class="mb-3">
                 <label>Category :</label>
                 <select asp-for="MovieCategoryId" asp-items="@ViewBag.Categories" class="form-select">
                 </select>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="@Model.MovieReview"></label>
+                <textarea asp-for="@Model.MovieReview" class="form-control" rows="5" /></textarea>
+                <span asp-validation-for="@Model.MovieReview" class="text-danger"></span>
             </div>
             <hr class="my-4">
             <div class="mb-3">
