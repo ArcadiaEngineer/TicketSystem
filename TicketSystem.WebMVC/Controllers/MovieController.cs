@@ -39,6 +39,13 @@ namespace TicketSystem.WebMVC.Controllers
 
         [Authorize(Roles = "Employee")]
         [HttpGet]
+        public async Task<IActionResult> GetListMovies()
+        {
+            var result = await _movieService.GetAllAsync();
+            return this.List<MovieListingDto, Movie>(result, _mapper);
+        }
+        [Authorize(Roles = "Employee")]
+        [HttpGet]
         public async Task<IActionResult> Add()
         {
             var list = await _categoryService.GetAllAsync();
@@ -66,7 +73,7 @@ namespace TicketSystem.WebMVC.Controllers
         {
             if (id == 0)
             {
-                return View("GetAll");
+                return View("GetListMovies");
             }
             var result = await _movieService.GetByIdAsync(id);
             if (result.Success)
@@ -81,7 +88,7 @@ namespace TicketSystem.WebMVC.Controllers
                 var movieUpdateDto = _mapper.Map<MovieUpdateDto>(result.Data);
                 return View(movieUpdateDto);
             }
-            return View("GetAll");
+            return View("GetListMovies");
         }
 
         [Authorize(Roles = "Employee")]
@@ -99,7 +106,7 @@ namespace TicketSystem.WebMVC.Controllers
         {
             if (id == 0)
             {
-                return RedirectToAction("GetAll");
+                return RedirectToAction("GetListMovies");
             }
 
             var result = await _movieService.GetByIdAsync(id);
@@ -109,7 +116,7 @@ namespace TicketSystem.WebMVC.Controllers
                 await _movieService.RemoveAsync(movie);
             }
 
-            return RedirectToAction("GetAll");
+            return RedirectToAction("GetListMovies");
 
         }
         private int FindEmployeeId()

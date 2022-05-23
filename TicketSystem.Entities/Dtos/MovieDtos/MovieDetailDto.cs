@@ -7,7 +7,6 @@ namespace TicketSystem.Entities.Dtos.MovieDtos
         public int MovieId { get; set; }
         public string? MovieName { get; set; }
         public DateTime MovieVisionDate { get; set; }
-        public DateTime MovieReleaseTime { get; set; }
         public byte[]? MovieBanner { get; set; }
         public string? CategoryName { get; set; }
         public int? MovieIMDB { get; set; }

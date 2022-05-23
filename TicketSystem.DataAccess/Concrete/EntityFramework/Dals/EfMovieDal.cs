@@ -21,7 +21,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
                                  CategoryName = c.CategoryName,
                                  MovieId = m.MovieId,
                                  MovieVisionDate = m.MovieVisionDate,
-                                 MovieReleaseTime = m.MovieReleaseTime,
                                  MovieAgeLimit = m.MovieAgeLimit,
                                  MovieReview = m.MovieReview
                              };
