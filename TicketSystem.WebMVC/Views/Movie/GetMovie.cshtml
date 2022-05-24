@@ -4,7 +4,30 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+function showDiv() {
+  var div = document.getElementById("BuyTicketDiv");  
+  div.style.display = "block";
+}
+function showSessionDiv() {
+  var div = document.getElementById("session");
+  var place = document.getElementById("places").value;
+    alert(place);
+  div.style.display = "block";
 
+  var date = new Date();
+var day = date.getDate();
+var month = date.getMonth() + 1;
+var year = date.getFullYear();
+
+if (month < 10) month = "0" + month;
+if (day < 10) day = "0" + day;
+
+var today = year + "-" + month + "-" + day;       
+document.getElementById("selectDate").value = today;
+}
+
+</script>
 <div class="section-header">
     <div class="container">
         <div class="row">
@@ -43,14 +66,48 @@
         <div class="col-md-8">
             <h3><small>Category</small></h3>
             <small>@Model.CategoryName</small>
-            <h3><small>Modeli</small></h3>
+            <h3><small>Vision Date</small></h3>
             <p><small>@Model.MovieVisionDate</small></p>
             <h3>Review</h3>
             <p class="text-justify">@Model.MovieReview</p>
-
+            <a class="btn btn-primary"  onclick="showDiv()">Buy <i class="fa fa-angle-right"></i></a>
+            
         </div>
 
     </div>
+    <div class="row" id="BuyTicketDiv">
+        <div class="col-lg-3">
+            <form class="SelectForm">
+                
+                <h3 class="searchHeader">Select place:</h3>
+                <div class="form-group">
+                    <select id="places" class="form-control" onchange="showSessionDiv()">
+                        <option value="aybu">AYBU</option>
+                        <option value="odtu">ODTU</option>
+                        <option value="gazi">GAZI UNI</option>
+                        <option value="bilkent" selected>BILKENT</option>
+                    </select>
+                </div>
+                <h3 class="searchHeader">Select date:</h3>
+                <div class="form-group">
 
+                    <input class="form-control" type="date" id="selectDate" min="2018-04-01" max="2022-04-30" required>
+                    <span class="validity"></span>
+                </div>
+                
+            </form>
+
+        </div>
+         <div class="col-lg-9 mt-5" id="session" >
+             <div class="panel panel-default session">
+                <div class="panel-heading">2D</div>
+                <div class="panel-body">
+                    <a class="btn btn-primary time">12:00 <i class="fa fa-clock"></i></a>   
+                    <a class="btn btn-primary time">13:00 <i class="fa fa-clock"></i></a> 
+                </div>
+            </div>
+               
+         </div>
+    </div>
 
 </div><!-- /.container -->
