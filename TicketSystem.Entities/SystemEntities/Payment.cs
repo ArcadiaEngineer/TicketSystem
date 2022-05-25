@@ -6,6 +6,7 @@ namespace TicketSystem.Entities.SystemEntities
     {
         public int PaymentId { get; set; }
         public int CustomerId { get; set; }
+        
         public Customer? Customer { get; set; }
         public string? CardUserName { get; set; }
         public string? CVV { get; set; }

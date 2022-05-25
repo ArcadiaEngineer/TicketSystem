@@ -47,7 +47,15 @@ namespace TicketSystem.Business.Concrete
             }
             return new ErrorDataResult<Seat>();
         }
-
+        public async Task<IDataResult<List<Seat>>> GetBySceneIdAsync(int id)
+        {
+            var seats = await _seatDal.GetAllAsync(s => s.SceneId == id);
+            if (seats != null)
+            {
+                return new SuccessDataResult<List<Seat>>(seats);
+            }
+            return new ErrorDataResult<List<Seat>>();
+        }
         public async Task<IResult> RemoveAsync(Seat seat)
         {
             _seatDal.Remove(seat);

@@ -9,6 +9,9 @@ function showDiv() {
   var div = document.getElementById("BuyTicketDiv");  
   div.style.display = "block";
 }
+
+var sessionId;
+
 function showSessionDiv() {
   var div = document.getElementById("session");
   var place = document.getElementById("places").value;
@@ -25,6 +28,33 @@ if (day < 10) day = "0" + day;
 
 var today = year + "-" + month + "-" + day;       
 document.getElementById("selectDate").value = today;
+
+   
+          $.get('/Customer/GetSessions/'+ $("#Movieid").text(), function (data) {
+               //create a empty string to append data
+               var str_2d = "";
+               var str_3d = "";
+               //loop through data
+               $.each(data, function (index, item) {
+                   var hour = item.sessionHour + ":00";
+                   if (item.sceneType == "Normal") {
+                       //get each list item returned value and add it as string
+                       str_2d = str_2d + "<a class='btn btn-primary time' href='/Customer/GetTicketOfSession/"+item.sessionId+"'> " + hour + "<i class='fa fa-clock'></i></a>";
+                       
+                   }
+                   else {
+                       str_3d = str_3d + "<a class='btn btn-primary time' href='/Customer/GetTicketOfSession/"+item.sessionId+"'> " + hour + "</a>";
+                   }
+                   
+               });
+
+              
+               //append item in Table body to 
+               $("#panel-session-2d").html(str_2d);
+                $("#panel-session-3d").html(str_3d);
+           });
+
+ 
 }
 
 </script>
@@ -33,7 +63,7 @@ document.getElementById("selectDate").value = today;
         <div class="row">
 
             <div class="col-lg-12">
-                <h1 class="page-header">Ürün Detayı</h1>
+                <h1 class="page-header">Movie Details</h1>
             </div>
 
         </div>
@@ -64,8 +94,10 @@ document.getElementById("selectDate").value = today;
         </div>
 
         <div class="col-md-8">
+            <h3 id="Movieid">@Model.MovieId</h3>
             <h3><small>Category</small></h3>
             <small>@Model.CategoryName</small>
+            
             <h3><small>Vision Date</small></h3>
             <p><small>@Model.MovieVisionDate</small></p>
             <h3>Review</h3>
@@ -81,11 +113,7 @@ document.getElementById("selectDate").value = today;
                 
                 <h3 class="searchHeader">Select place:</h3>
                 <div class="form-group">
-                    <select id="places" class="form-control" onchange="showSessionDiv()">
-                        <option value="aybu">AYBU</option>
-                        <option value="odtu">ODTU</option>
-                        <option value="gazi">GAZI UNI</option>
-                        <option value="bilkent" selected>BILKENT</option>
+                    <select asp-items="@ViewBag.Cinemas" id="places" onchange="showSessionDiv()" class="form-control">
                     </select>
                 </div>
                 <h3 class="searchHeader">Select date:</h3>
@@ -101,9 +129,12 @@ document.getElementById("selectDate").value = today;
          <div class="col-lg-9 mt-5" id="session" >
              <div class="panel panel-default session">
                 <div class="panel-heading">2D</div>
-                <div class="panel-body">
-                    <a class="btn btn-primary time">12:00 <i class="fa fa-clock"></i></a>   
-                    <a class="btn btn-primary time">13:00 <i class="fa fa-clock"></i></a> 
+                <div class="panel-body" id="panel-session-2d">
+                    
+                </div>
+                <div class="panel-heading">3D</div>
+                <div class="panel-body" id="panel-session-3d" >
+                    
                 </div>
             </div>
                
