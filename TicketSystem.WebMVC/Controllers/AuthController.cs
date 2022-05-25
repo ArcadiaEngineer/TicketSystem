@@ -35,7 +35,7 @@ namespace TicketSystem.WebMVC.Controllers
                 if (createResponse.Success)
                 {
                     await ConfigureCookie(createResponse.Data, rememberMe);
-                    return RedirectToAction("GetListMovies", "Movie");
+                    return RedirectToAction("GetAll", "Movie");
                 }
             }
             return RedirectToAction("LogIn", "Auth");

@@ -73,9 +73,17 @@
                         <form method="get" asp-action="GetMovie" asp-controller="Movie" asp-route-id=@item.MovieId>
                             <button class="btn btn-outline-danger" type="submit">See Movie Detail</button>
                         </form>
+                        <hr />
+                        @if (User.IsInRole("Customer"))
+                        {
+                            <form method="get" asp-action="BuyTicket" asp-controller="Customer" asp-route-id=@item.MovieId>
+                                <button class="btn btn-outline-danger" type="submit">Buy</button>
+                            </form>
+                        }
                     </div>
 
                 </div>
+                <hr />
             }
             <hr>
         </div>

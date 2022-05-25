@@ -22,7 +22,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         opt.Cookie.SameSite = SameSiteMode.Strict;
         opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
         opt.ExpireTimeSpan = TimeSpan.FromDays(20);
-        opt.AccessDeniedPath = new PathString("/Auth/SignUp");
+        opt.AccessDeniedPath = new PathString("/Home/Index");
         opt.LoginPath = new PathString("/Auth/LogIn");
     });
 
