@@ -35,7 +35,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Configurations
 
             builder.HasKey(c => c.CustomerId);
             builder.HasMany(c => c.Tickets).WithOne(t => t.Customer).OnDelete(DeleteBehavior.NoAction);
-            builder.HasMany(c => c.Payments).WithOne(p => p.Customer).OnDelete(DeleteBehavior.NoAction);
 
         }
     }

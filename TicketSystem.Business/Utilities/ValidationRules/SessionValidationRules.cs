@@ -8,7 +8,6 @@ namespace TicketSystem.Business.Utilities.ValidationRules
         public SessionValidationRules()
         {
             RuleFor(s => s.SessionTime).NotEmpty().NotNull();
-            RuleFor(s => s.SessionHour).NotEmpty().NotNull().GreaterThanOrEqualTo(1);
             RuleFor(s => s.MovieId).NotNull().NotEmpty().GreaterThanOrEqualTo(1);
             RuleFor(s => s.SceneId).NotNull().NotEmpty().GreaterThanOrEqualTo(1);
         }

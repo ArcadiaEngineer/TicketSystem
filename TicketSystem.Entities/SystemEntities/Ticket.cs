@@ -9,8 +9,6 @@ namespace TicketSystem.Entities.SystemEntities
         public Session? Session { get; set; }
         public int CustomerId { get; set; }
         public Customer? Customer { get; set; }
-        public int StudentNum { get; set; }
-        public int AdultNum { get; set; }
         public decimal Price { get; set; }
     }
 }

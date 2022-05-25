@@ -19,12 +19,10 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
                              where m.MovieId == id
                              select new SessionDetailDto
                              {
-                                 SessionId=s.SessionId,
-                                 SessionTime=s.SessionTime,
-                                 MovieName=m.MovieName,
-                                 SceneName=sc.SceneName,
-                                 SceneType=sc.SceneType,
-                                 SessionHour= s.SessionTime.Hour
+                                 SessionId = s.SessionId,
+                                 SessionTime = s.SessionTime,
+                                 MovieName = m.MovieName,
+                                 SceneType = sc.SceneType,
                              };
                 return result.ToList();
             }
@@ -44,10 +42,8 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
                                  SessionId = s.SessionId,
                                  SessionTime = s.SessionTime,
                                  MovieName = m.MovieName,
-                                 SceneId=s.SceneId,
-                                 SceneName = sc.SceneName,
+                                 SceneId = s.SceneId,
                                  SceneType = sc.SceneType,
-                                 SessionHour = s.SessionTime.Hour
                              };
                 return result.SingleOrDefault();
             }

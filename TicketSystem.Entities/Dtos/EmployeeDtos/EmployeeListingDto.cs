@@ -5,7 +5,6 @@ namespace TicketSystem.Entities.Dtos
     public class EmployeeListingDto : IDto
     {
         public int EmpoyeeId { get; set; }
-        public int CinemaId { get; set; }
         public string? EmpUserName { get; set; }
         public string? EmpPassword { get; set; }
         public string? EmpName { get; set; }

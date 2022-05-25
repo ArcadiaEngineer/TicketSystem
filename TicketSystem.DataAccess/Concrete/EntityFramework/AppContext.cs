@@ -21,12 +21,10 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework
         public DbSet<Employee>? Employees { get; set; }
         public DbSet<Movie>? Movies { get; set; }
         public DbSet<Customer>? Customers { get; set; }
-        public DbSet<Cinema>? Cinemas { get; set; }
         public DbSet<Session>? Sessions { get; set; }
         public DbSet<Ticket>? Tickets { get; set; }
         public DbSet<Scene>? Scenes { get; set; }
         public DbSet<Seat>? Seats { get; set; }
-        public DbSet<Payment>? Payments { get; set; }
         public DbSet<Category>? Categories { get; set; }
 
     }

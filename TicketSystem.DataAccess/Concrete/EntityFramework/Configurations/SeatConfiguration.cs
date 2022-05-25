@@ -13,7 +13,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(s => s.SessionId).IsRequired();
 
             builder.HasKey(s => s.SeatId);
-            builder.HasIndex(s => new { s.SessionId , s.SeatNumber }).IsUnique();
+            builder.HasIndex(s => new { s.SessionId, s.SeatNumber }).IsUnique();
             builder.HasOne(s => s.Scene).WithMany(sc => sc.Seats).HasForeignKey(s => s.SceneId);
 
         }

@@ -7,6 +7,5 @@ namespace TicketSystem.Entities.Dtos
         public int MovieId { get; set; }
         public int SceneId { get; set; }
         public DateTime SessionTime { get; set; }
-        public int SessionHour { get; set; }
     }
 }

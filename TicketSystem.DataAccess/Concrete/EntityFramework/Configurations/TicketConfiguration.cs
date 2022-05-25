@@ -9,8 +9,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Configurations
         public void Configure(EntityTypeBuilder<Ticket> builder)
         {
             builder.Property(t => t.TicketId).IsRequired();
-            builder.Property(t => t.StudentNum).IsRequired();
-            builder.Property(t => t.AdultNum).IsRequired();
             builder.Property(t => t.Price).IsRequired();
             builder.Property(t => t.Price).HasColumnType("money");
 

@@ -4,7 +4,6 @@ namespace TicketSystem.Entities.Dtos
 {
     public class EmployeeCreateDto : IDto
     {
-        public int CinemaId { get; set; }
         public string? EmpUserName { get; set; }
         public string? EmpPassword { get; set; }
         public string? EmpName { get; set; }

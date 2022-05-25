@@ -38,7 +38,7 @@ namespace TicketSystem.Business.Concrete
             return new ErrorDataResult<List<Movie>>();
         }
 
-        
+
         public async Task<IDataResult<Movie>> GetByIdAsync(int id)
         {
             var movie = await _movieDal.GetByFilterAsync(m => m.MovieId == id);
@@ -64,7 +64,7 @@ namespace TicketSystem.Business.Concrete
 
         public IDataResult<MovieDetailDto> GetMovieDetailAsync(int id)
         {
-            var movie =_movieDal.GetMovieDetail(id);
+            var movie = _movieDal.GetMovieDetail(id);
             if (movie != null)
             {
                 return new SuccessDataResult<MovieDetailDto>(movie);
@@ -74,7 +74,7 @@ namespace TicketSystem.Business.Concrete
 
         public IDataResult<List<Movie>> GetMovieByFilters(string movieName = null, int? categoyId = null, DateTime? vdate = null)
         {
-            var movie = _movieDal.GetMovieByFilters(movieName,categoyId, vdate);
+            var movie = _movieDal.GetMovieByFilters(movieName, categoyId, vdate);
             if (movie != null)
             {
                 return new SuccessDataResult<List<Movie>>(movie);

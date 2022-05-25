@@ -8,10 +8,6 @@ namespace TicketSystem.Business.Utilities.Profiles
     {
         public MapProfile()
         {
-            CreateMap<Cinema, CinemaCreateDto>().ReverseMap();
-            CreateMap<Cinema, CinemaListingDto>().ReverseMap();
-            CreateMap<Cinema, CinemaUpdateDto>().ReverseMap();
-
             CreateMap<Customer, CustomerCreateDto>().ReverseMap();
             CreateMap<Customer, CustomerListingDto>().ReverseMap();
             CreateMap<Customer, CustomerUpdateDto>().ReverseMap();
@@ -24,10 +20,6 @@ namespace TicketSystem.Business.Utilities.Profiles
             CreateMap<Movie, MovieListingDto>().ReverseMap();
             CreateMap<Movie, MovieUpdateDto>().ReverseMap();
             CreateMap<MovieListingDto, MovieUpdateDto>().ReverseMap();
-
-            CreateMap<Payment, PaymentCreateDto>().ReverseMap();
-            CreateMap<Payment, PaymentListingDto>().ReverseMap();
-            CreateMap<Payment, PaymentUpdateDto>().ReverseMap();
 
             CreateMap<Scene, SceneCreateDto>().ReverseMap();
             CreateMap<Scene, SceneListingDto>().ReverseMap();

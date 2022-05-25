@@ -14,43 +14,35 @@ namespace TicketSystem.WebMVC.Controllers
         IMovieService _movieService;
         IMapper _mapper;
         ICategoryService _categoryService;
-        ICinemaService _cinemaService;
 
-        public MovieController(IMovieService movieService, IMapper mapper, ICategoryService categoryService, ICinemaService cinemaService)
+        public MovieController(IMovieService movieService, IMapper mapper, ICategoryService categoryService)
         {
             _movieService = movieService;
             _mapper = mapper;
             _categoryService = categoryService;
-            _cinemaService = cinemaService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(string movieName = null, int? categoyId = null, DateTime? vdate=null)
+        public async Task<IActionResult> GetAll(string movieName = null, int? categoyId = null, DateTime? vdate = null)
         {
-            
+
             var categories = await _categoryService.GetAllAsync();
             ViewBag.MovieName = movieName;
             if (categories.Success)
             {
-                ViewBag.Categories =categories.Data;
+                ViewBag.Categories = categories.Data;
             }
 
-            
 
-            var result = _movieService.GetMovieByFilters(movieName,categoyId,vdate);
+
+            var result = _movieService.GetMovieByFilters(movieName, categoyId, vdate);
 
             return View(result.Data);
         }
 
-        
+
         public async Task<IActionResult> GetMovie(int id)
         {
-            var cinemas = await _cinemaService.GetAllAsync();
-
-            if (cinemas.Success)
-            {
-                ViewBag.Cinemas = new SelectList(cinemas.Data, "CinemaId", "CinemaName");
-            }
             var result = _movieService.GetMovieDetailAsync(id);
             return View(result.Data);
         }
@@ -60,7 +52,7 @@ namespace TicketSystem.WebMVC.Controllers
         //{
         //    var result = await _movieService.GetAllAsync();
         //    List<Movie> filteredList = result.Data;
-            
+
         //    var moviesFiltered = (from n in filteredList
         //                          where n.MovieCategoryId.Equals(categorys)
         //                          select n).ToList();
@@ -155,6 +147,6 @@ namespace TicketSystem.WebMVC.Controllers
             return Convert.ToInt32(User.FindFirst("Id")!.Value);
         }
 
-        
+
     }
 }

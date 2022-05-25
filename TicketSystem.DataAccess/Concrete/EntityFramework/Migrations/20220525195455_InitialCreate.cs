@@ -23,20 +23,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cinemas",
-                columns: table => new
-                {
-                    CinemaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CinemaName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CinemaAddress = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cinemas", x => x.CinemaId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -62,7 +48,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 {
                     EmpoyeeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CinemaId = table.Column<int>(type: "int", nullable: false),
                     EmpUserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EmpPassword = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EmpName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -75,11 +60,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.EmpoyeeId);
-                    table.ForeignKey(
-                        name: "FK_Employees_Cinemas_CinemaId",
-                        column: x => x.CinemaId,
-                        principalTable: "Cinemas",
-                        principalColumn: "CinemaId");
                 });
 
             migrationBuilder.CreateTable(
@@ -88,41 +68,11 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 {
                     SceneId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CinemaId = table.Column<int>(type: "int", nullable: false),
-                    SceneName = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     SceneType = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Scenes", x => x.SceneId);
-                    table.ForeignKey(
-                        name: "FK_Scenes_Cinemas_CinemaId",
-                        column: x => x.CinemaId,
-                        principalTable: "Cinemas",
-                        principalColumn: "CinemaId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Payments",
-                columns: table => new
-                {
-                    PaymentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    CardUserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CVV = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    CardDueDate = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    CardId = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    EInvoice = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
-                    table.ForeignKey(
-                        name: "FK_Payments_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId");
                 });
 
             migrationBuilder.CreateTable(
@@ -134,8 +84,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                     EmployeeId = table.Column<int>(type: "int", nullable: false),
                     MovieName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     MovieVisionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MovieReleaseTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MovieBanner = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    MovieBanner = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     MovieCategoryId = table.Column<int>(type: "int", nullable: false),
                     MovieIMDB = table.Column<int>(type: "int", nullable: true),
                     MovieReview = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
@@ -184,8 +133,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MovieId = table.Column<int>(type: "int", nullable: false),
                     SceneId = table.Column<int>(type: "int", nullable: false),
-                    SessionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SessionHour = table.Column<int>(type: "int", maxLength: 5, nullable: false)
+                    SessionTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -210,8 +158,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SessionId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
-                    StudentNum = table.Column<int>(type: "int", nullable: false),
-                    AdultNum = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "money", nullable: false)
                 },
                 constraints: table =>
@@ -242,33 +188,18 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Cinemas",
-                columns: new[] { "CinemaId", "CinemaAddress", "CinemaName" },
+                table: "Employees",
+                columns: new[] { "EmpoyeeId", "EmpAddress", "EmpBirthDate", "EmpEmail", "EmpName", "EmpPassword", "EmpPhoneNumber", "EmpSurname", "EmpUserName" },
+                values: new object[] { 1, "Ankara", new DateTime(2022, 6, 25, 22, 54, 54, 989, DateTimeKind.Local).AddTicks(8638), "sncr.@html.com", "Ismail", "Admin", "0534543123", "Bal", "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "Scenes",
+                columns: new[] { "SceneId", "SceneType" },
                 values: new object[,]
                 {
-                    { 1, "Anteras AVM", "Cinemaximum" },
-                    { 2, "Kızılay", "Deniz Feneri" }
+                    { 1, "Three-D" },
+                    { 2, "Normal" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Employees",
-                columns: new[] { "EmpoyeeId", "CinemaId", "EmpAddress", "EmpBirthDate", "EmpEmail", "EmpName", "EmpPassword", "EmpPhoneNumber", "EmpSurname", "EmpUserName" },
-                values: new object[] { 1, 1, "Ankara", new DateTime(2022, 5, 8, 18, 42, 18, 521, DateTimeKind.Local).AddTicks(5463), "sncr.@html.com", "Ismail", "Admin", "0534543123", "Bal", "Admin" });
-
-            migrationBuilder.InsertData(
-                table: "Scenes",
-                columns: new[] { "SceneId", "CinemaId", "SceneName", "SceneType" },
-                values: new object[] { 1, 1, "543", "Three-D" });
-
-            migrationBuilder.InsertData(
-                table: "Scenes",
-                columns: new[] { "SceneId", "CinemaId", "SceneName", "SceneType" },
-                values: new object[] { 2, 1, "761", "Normal" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employees_CinemaId",
-                table: "Employees",
-                column: "CinemaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movies_EmployeeId",
@@ -279,16 +210,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                 name: "IX_Movies_MovieCategoryId",
                 table: "Movies",
                 column: "MovieCategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Payments_CustomerId",
-                table: "Payments",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Scenes_CinemaId",
-                table: "Scenes",
-                column: "CinemaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Seats_SceneId",
@@ -325,9 +246,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Payments");
-
-            migrationBuilder.DropTable(
                 name: "Seats");
 
             migrationBuilder.DropTable(
@@ -350,9 +268,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
 
             migrationBuilder.DropTable(
                 name: "Employees");
-
-            migrationBuilder.DropTable(
-                name: "Cinemas");
         }
     }
 }

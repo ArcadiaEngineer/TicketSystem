@@ -7,7 +7,6 @@ namespace TicketSystem.Business.Utilities.ValidationRules
     {
         public EmployeeValidationRules()
         {
-            RuleFor(e => e.CinemaId).NotEmpty().NotNull().GreaterThanOrEqualTo(1);
             RuleFor(e => e.EmpUserName).NotEmpty().NotNull();
             RuleFor(e => e.EmpPassword).NotEmpty().NotNull();
             RuleFor(e => e.EmpName).NotEmpty().NotNull();

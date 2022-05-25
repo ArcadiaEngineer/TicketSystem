@@ -34,14 +34,12 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(e => e.EmpBirthDate).IsRequired(false);
 
             builder.HasKey(e => e.EmpoyeeId);
-            builder.HasOne(e => e.Cinema).WithMany(c => c.Employees).HasForeignKey(e => e.CinemaId);
 
             builder.HasMany(e => e.Movies).WithOne(m => m.Employee).OnDelete(DeleteBehavior.NoAction);
 
             builder.HasData(new Employee
             {
                 EmpoyeeId = 1,
-                CinemaId = 1,
                 EmpAddress = "Ankara",
                 EmpEmail = "sncr.@html.com",
                 EmpName = "Ismail",

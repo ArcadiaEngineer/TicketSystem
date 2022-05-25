@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 
 namespace TicketSystem.WebMVC.Controllers
 {
@@ -7,7 +6,7 @@ namespace TicketSystem.WebMVC.Controllers
     {
         public IActionResult Index()
         {
-           
+
             return View();
         }
     }

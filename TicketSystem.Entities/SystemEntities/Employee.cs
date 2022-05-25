@@ -5,8 +5,6 @@ namespace TicketSystem.Entities.SystemEntities
     public class Employee : IEntity
     {
         public int EmpoyeeId { get; set; }
-        public int CinemaId { get; set; }
-        public Cinema? Cinema { get; set; }
         public string? EmpUserName { get; set; }
         public string? EmpPassword { get; set; }
         public string? EmpName { get; set; }

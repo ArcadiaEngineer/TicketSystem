@@ -11,7 +11,6 @@
 
         <div class="row g-5">
             <div class="col-md-5 col-lg-4 order-md-last">
-                @await Component.InvokeAsync("GetPurchasesComponent",Model.CustomerId)
                 @await Component.InvokeAsync("GetBoughtTicketsComponent",Model.CustomerId)
             </div>
             <div class="col-md-7 col-lg-8">

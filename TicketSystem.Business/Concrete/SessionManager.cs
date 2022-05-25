@@ -22,10 +22,10 @@ namespace TicketSystem.Business.Concrete
         public async Task<IResult> CheckSeat(int sessionId, int seatNumber)
         {
             var session = await _seesionDal.GetByFilterAsync(s => s.SessionId == sessionId);
-            if(session != null)
+            if (session != null)
             {
                 var scene = await _sceneService.GetSceneWithDetailAsync(session.SceneId);
-                if(scene != null && scene.Data.Seats != null)
+                if (scene != null && scene.Data.Seats != null)
                 {
                     var result = scene.Data.Seats.Any(s => s.SessionId == session.SessionId && s.SeatNumber == seatNumber);
                     if (result)

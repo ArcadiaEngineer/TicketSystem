@@ -1,5 +1,4 @@
 ﻿using TicketSystem.Core.Abstract.Dal;
-using TicketSystem.Entities.Dtos;
 using TicketSystem.Entities.Dtos.MovieDtos;
 using TicketSystem.Entities.SystemEntities;
 

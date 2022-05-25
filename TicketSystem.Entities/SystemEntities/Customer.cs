@@ -14,6 +14,5 @@ namespace TicketSystem.Entities.SystemEntities
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
         public List<Ticket>? Tickets { get; set; }
-        public List<Payment>? Payments { get; set; }
     }
 }

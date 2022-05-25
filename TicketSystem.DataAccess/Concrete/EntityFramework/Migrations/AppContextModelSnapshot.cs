@@ -62,43 +62,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Cinema", b =>
-                {
-                    b.Property<int>("CinemaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CinemaId"), 1L, 1);
-
-                    b.Property<string>("CinemaAddress")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("CinemaName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("CinemaId");
-
-                    b.ToTable("Cinemas");
-
-                    b.HasData(
-                        new
-                        {
-                            CinemaId = 1,
-                            CinemaAddress = "Anteras AVM",
-                            CinemaName = "Cinemaximum"
-                        },
-                        new
-                        {
-                            CinemaId = 2,
-                            CinemaAddress = "Kızılay",
-                            CinemaName = "Deniz Feneri"
-                        });
-                });
-
             modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
@@ -157,9 +120,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmpoyeeId"), 1L, 1);
 
-                    b.Property<int>("CinemaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("EmpAddress")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -197,17 +157,14 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
 
                     b.HasKey("EmpoyeeId");
 
-                    b.HasIndex("CinemaId");
-
                     b.ToTable("Employees");
 
                     b.HasData(
                         new
                         {
                             EmpoyeeId = 1,
-                            CinemaId = 1,
                             EmpAddress = "Ankara",
-                            EmpBirthDate = new DateTime(2022, 5, 8, 18, 42, 18, 521, DateTimeKind.Local).AddTicks(5463),
+                            EmpBirthDate = new DateTime(2022, 6, 25, 22, 54, 54, 989, DateTimeKind.Local).AddTicks(8638),
                             EmpEmail = "sncr.@html.com",
                             EmpName = "Ismail",
                             EmpPassword = "Admin",
@@ -232,7 +189,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                         .HasColumnType("int");
 
                     b.Property<byte[]>("MovieBanner")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<int>("MovieCategoryId")
@@ -245,9 +201,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("MovieReleaseTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("MovieReview")
                         .HasMaxLength(500)
@@ -265,49 +218,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Payment", b =>
-                {
-                    b.Property<int>("PaymentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"), 1L, 1);
-
-                    b.Property<string>("CVV")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<string>("CardDueDate")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<string>("CardId")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("CardUserName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EInvoice")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
-
-                    b.HasKey("PaymentId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Payments");
-                });
-
             modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Scene", b =>
                 {
                     b.Property<int>("SceneId")
@@ -316,14 +226,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SceneId"), 1L, 1);
 
-                    b.Property<int>("CinemaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SceneName")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
                     b.Property<string>("SceneType")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -331,23 +233,17 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
 
                     b.HasKey("SceneId");
 
-                    b.HasIndex("CinemaId");
-
                     b.ToTable("Scenes");
 
                     b.HasData(
                         new
                         {
                             SceneId = 1,
-                            CinemaId = 1,
-                            SceneName = "543",
                             SceneType = "Three-D"
                         },
                         new
                         {
                             SceneId = 2,
-                            CinemaId = 1,
-                            SceneName = "761",
                             SceneType = "Normal"
                         });
                 });
@@ -393,10 +289,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                     b.Property<int>("SceneId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SessionHour")
-                        .HasMaxLength(5)
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("SessionTime")
                         .HasColumnType("datetime2");
 
@@ -417,9 +309,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketId"), 1L, 1);
 
-                    b.Property<int>("AdultNum")
-                        .HasColumnType("int");
-
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
@@ -429,9 +318,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                     b.Property<int>("SessionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentNum")
-                        .HasColumnType("int");
-
                     b.HasKey("TicketId");
 
                     b.HasIndex("CustomerId");
@@ -439,17 +325,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                     b.HasIndex("SessionId");
 
                     b.ToTable("Tickets");
-                });
-
-            modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Employee", b =>
-                {
-                    b.HasOne("TicketSystem.Entities.SystemEntities.Cinema", "Cinema")
-                        .WithMany("Employees")
-                        .HasForeignKey("CinemaId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Cinema");
                 });
 
             modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Movie", b =>
@@ -469,28 +344,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Payment", b =>
-                {
-                    b.HasOne("TicketSystem.Entities.SystemEntities.Customer", "Customer")
-                        .WithMany("Payments")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Scene", b =>
-                {
-                    b.HasOne("TicketSystem.Entities.SystemEntities.Cinema", "Cinema")
-                        .WithMany("Scenes")
-                        .HasForeignKey("CinemaId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Cinema");
                 });
 
             modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Seat", b =>
@@ -547,17 +400,8 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                     b.Navigation("Movies");
                 });
 
-            modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Cinema", b =>
-                {
-                    b.Navigation("Employees");
-
-                    b.Navigation("Scenes");
-                });
-
             modelBuilder.Entity("TicketSystem.Entities.SystemEntities.Customer", b =>
                 {
-                    b.Navigation("Payments");
-
                     b.Navigation("Tickets");
                 });
 

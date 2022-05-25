@@ -2,7 +2,7 @@
 
 namespace TicketSystem.Entities.Dtos.MovieDtos
 {
-    public class MovieDetailDto:IDto
+    public class MovieDetailDto : IDto
     {
         public int MovieId { get; set; }
         public string? MovieName { get; set; }

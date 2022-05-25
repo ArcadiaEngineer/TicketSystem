@@ -16,11 +16,6 @@
                 <input asp-for="@Model.SessionTime" class="form-control" />
                 <span asp-validation-for="@Model.SessionTime" class="text-danger"></span>
             </div>
-            <div class="form-group mb-3">
-                <label asp-for="@Model.SessionHour"></label>
-                <input asp-for="@Model.SessionHour" class="form-control" />
-                <span asp-validation-for="@Model.SessionHour" class="text-danger"></span>
-            </div>
             <div class="mb-3">
                 <label>Movies :</label>
                 <select  asp-for="MovieId" asp-items="@ViewBag.Movies" class="form-select">

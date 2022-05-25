@@ -1,6 +1,5 @@
 ﻿using TicketSystem.Core.Abstract.Dal;
 using TicketSystem.DataAccess.Abstract.Dal;
-using TicketSystem.Entities.Dtos;
 using TicketSystem.Entities.Dtos.MovieDtos;
 using TicketSystem.Entities.SystemEntities;
 
@@ -8,19 +7,19 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
 {
     public class EfMovieDal : EntityRepositoryBase<Movie, AppContext>, IMovieDal
     {
-        public List<Movie> GetMovieByFilters(string movieName=null, int? categoyId=null, DateTime? vdate = null)
+        public List<Movie> GetMovieByFilters(string movieName = null, int? categoyId = null, DateTime? vdate = null)
         {
-            
+
             using (AppContext context = new AppContext())
             {
-                IQueryable<Movie> query=context.Movies;
+                IQueryable<Movie> query = context.Movies;
                 if (movieName != null)
                 {
                     query = query.Where(i => i.MovieName.ToLower().Contains(movieName.ToLower()));
                 }
-                if(categoyId!=null)
+                if (categoyId != null)
                 {
-                    query = query.Where(i => i.MovieCategoryId==categoyId);
+                    query = query.Where(i => i.MovieCategoryId == categoyId);
                 }
                 if (vdate != null)
                 {
@@ -28,7 +27,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
                 }
                 return query.ToList();
             }
-             
+
         }
 
         MovieDetailDto IMovieDal.GetMovieDetail(int id)

@@ -10,8 +10,6 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Configurations
         {
             builder.Property(s => s.SessionId).IsRequired();
             builder.Property(s => s.SessionTime).IsRequired();
-            builder.Property(s => s.SessionHour).IsRequired();
-            builder.Property(s => s.SessionHour).HasMaxLength(5);
 
             builder.HasKey(s => s.SessionId);
             builder.HasOne(s => s.Movie).WithMany(m => m.Sessions).HasForeignKey(s => s.MovieId);
