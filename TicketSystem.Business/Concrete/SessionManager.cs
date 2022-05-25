@@ -3,6 +3,7 @@ using TicketSystem.Business.Utilities.ValidationRules;
 using TicketSystem.Core.Aspects.Autofac;
 using TicketSystem.Core.Utilities.Results;
 using TicketSystem.DataAccess.Abstract.Dal;
+using TicketSystem.Entities.Dtos.SessionDtos;
 using TicketSystem.Entities.SystemEntities;
 
 namespace TicketSystem.Business.Concrete
@@ -73,6 +74,26 @@ namespace TicketSystem.Business.Concrete
                 return new SuccessDataResult<Session>(session);
             }
             return new ErrorDataResult<Session>();
+        }
+
+        public IDataResult<SessionDetailDto> GetSessionAsync(int id)
+        {
+            var session = _seesionDal.GetSession(id);
+            if (session != null)
+            {
+                return new SuccessDataResult<SessionDetailDto>(session);
+            }
+            return new ErrorDataResult<SessionDetailDto>();
+        }
+
+        public IDataResult<List<SessionDetailDto>> GetSessionDetailAsync(int id)
+        {
+            var session = _seesionDal.GetSessionDetail(id);
+            if (session != null)
+            {
+                return new SuccessDataResult<List<SessionDetailDto>>(session);
+            }
+            return new ErrorDataResult<List<SessionDetailDto>>();
         }
 
         public async Task<IResult> RemoveAsync(Session session)

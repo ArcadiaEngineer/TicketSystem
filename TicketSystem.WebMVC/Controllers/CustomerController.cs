@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TicketSystem.Business.Abstract;
 using TicketSystem.Entities.Dtos;
+using TicketSystem.Entities.Dtos.SessionDtos;
+using TicketSystem.Entities.SystemEntities;
 using TicketSystem.WebMVC.Utilities.Extentions;
 
 namespace TicketSystem.WebMVC.Controllers
 {
-    [Authorize(Roles = "Customer")]
+    
     public class CustomerController : Controller
     {
         ICustomerService _customerService;
@@ -16,14 +18,16 @@ namespace TicketSystem.WebMVC.Controllers
         IMapper _mapper;
         ITicketService _ticketService;
         ISeatService _seatService;
+        IPaymentService _paymentService;
 
-        public CustomerController(ICustomerService customerService, IMapper mapper, ISessionService sessionService, ITicketService ticketService, ISeatService seatService)
+        public CustomerController(ICustomerService customerService, IMapper mapper, ISessionService sessionService, IPaymentService paymentService, ITicketService ticketService, ISeatService seatService)
         {
             _customerService = customerService;
             _mapper = mapper;
             _sessionService = sessionService;
             _ticketService = ticketService;
             _seatService = seatService;
+            _paymentService = paymentService;
         }
 
         public async Task<IActionResult> GetProfile()
@@ -77,5 +81,56 @@ namespace TicketSystem.WebMVC.Controllers
         }
 
         private int FindCustomerId() => Convert.ToInt32(User.FindFirst("Id")!.Value);
+
+        [HttpGet]
+        public JsonResult GetSessions(int id)
+        {
+            var session = _sessionService.GetSessionDetailAsync(id);
+
+            return Json(session.Data);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetTicketOfSession(int id)
+        {
+            
+            var session = _sessionService.GetSessionAsync(id);
+            var seats = await _seatService.GetBySceneIdAsync(session.Data.SceneId);
+
+            if (session.Success)
+            {
+                ViewBag.Session = session.Data;
+            }
+            if (seats.Success)
+            {
+                ViewBag.Seats = new SelectList(seats.Data, "SeatId", "SeatNumber");
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> NewPayment(Payment payment)
+        {
+            payment.CustomerId = 2;
+            payment.EInvoice = "1";
+
+            
+
+            var result = await _paymentService.CreateAsync(payment);
+            if (result.Success)
+            {
+                Ticket t = new Ticket();
+                t.SessionId = 1;
+                t.CustomerId = payment.CustomerId;
+                t.Price = 100;
+
+                var ticket = await _ticketService.CreateAsync(t);
+                if (ticket.Success)
+                {
+                    return RedirectToAction("GetAll", "Movie");
+                }
+            }
+            
+            
+            return null;
+        }
     }
 }

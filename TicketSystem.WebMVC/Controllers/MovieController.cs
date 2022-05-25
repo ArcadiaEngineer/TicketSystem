@@ -25,37 +25,47 @@ namespace TicketSystem.WebMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(string movieName = null, int? categoyId = null, DateTime? vdate=null)
         {
             
             var categories = await _categoryService.GetAllAsync();
-
+            ViewBag.MovieName = movieName;
             if (categories.Success)
             {
-                ViewBag.Categories = new SelectList(categories.Data, "CategoryId", "CategoryName");
+                ViewBag.Categories =categories.Data;
             }
 
+            
+
+            var result = _movieService.GetMovieByFilters(movieName,categoyId,vdate);
+
+            return View(result.Data);
+        }
+
+        
+        public async Task<IActionResult> GetMovie(int id)
+        {
             var cinemas = await _cinemaService.GetAllAsync();
 
             if (cinemas.Success)
             {
-                ViewBag.Cinemas = new SelectList(cinemas.Data, "CinemaId", "CinemaAddress");
+                ViewBag.Cinemas = new SelectList(cinemas.Data, "CinemaId", "CinemaName");
             }
-
-            var result = await _movieService.GetAllAsync();
-            return this.List<MovieListingDto, Movie>(result, _mapper);
-        }
-
-        public IActionResult GetMovie(int id)
-        {
             var result = _movieService.GetMovieDetailAsync(id);
             return View(result.Data);
         }
 
         //[HttpPost]
-        //public IActionResult GetMoviesByFiltered(int categoryId, int cinemaId)
+        //public async Task<IActionResult> GetMoviesByFiltered(int[] categorys, int cinemaId)
         //{
-            //filtrelenmiş movie list gelecek
+        //    var result = await _movieService.GetAllAsync();
+        //    List<Movie> filteredList = result.Data;
+            
+        //    var moviesFiltered = (from n in filteredList
+        //                          where n.MovieCategoryId.Equals(categorys)
+        //                          select n).ToList();
+
+        //    return this.List<MovieListingDto, Movie>(moviesFiltered, _mapper);
         //}
 
         [Authorize(Roles = "Employee")]
@@ -144,5 +154,7 @@ namespace TicketSystem.WebMVC.Controllers
         {
             return Convert.ToInt32(User.FindFirst("Id")!.Value);
         }
+
+        
     }
 }

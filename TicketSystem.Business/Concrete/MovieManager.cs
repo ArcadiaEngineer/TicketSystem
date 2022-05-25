@@ -71,5 +71,15 @@ namespace TicketSystem.Business.Concrete
             }
             return new ErrorDataResult<MovieDetailDto>();
         }
+
+        public IDataResult<List<Movie>> GetMovieByFilters(string movieName = null, int? categoyId = null, DateTime? vdate = null)
+        {
+            var movie = _movieDal.GetMovieByFilters(movieName,categoyId, vdate);
+            if (movie != null)
+            {
+                return new SuccessDataResult<List<Movie>>(movie);
+            }
+            return new ErrorDataResult<List<Movie>>();
+        }
     }
 }

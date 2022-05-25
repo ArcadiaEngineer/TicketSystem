@@ -7,5 +7,6 @@ namespace TicketSystem.Business.Abstract
     public interface IMovieService : IGenericService<Movie>
     {
         IDataResult<MovieDetailDto> GetMovieDetailAsync(int id);
+        IDataResult<List<Movie>> GetMovieByFilters(string movieName = null, int? categoyId = null, DateTime? vdate = null);
     }
 }

@@ -380,15 +380,25 @@ div.list-posts ul li a:hover{
 .post-meta .fa.first{
   margin: 0 5px 0 0;
 }
-
+/* Buy Ticket Page */
+#BuyTicketDiv, #session {
+    display: none;
+}
+.session{
+    margin-top:10px;
+}
+.time {
+    margin-top: 10px;
+    margin-left:10px
+}
 /* comments */
-.comment-author-icon{
-  background: #ECF0F1;
-  padding: 18px 20px;
-  border-radius: 50px;
-  margin: 10px 0 0 0;
-  font-size: 20px;
-  line-height: 20px;
+.comment-author-icon {
+    background: #ECF0F1;
+    padding: 18px 20px;
+    border-radius: 50px;
+    margin: 10px 0 0 0;
+    font-size: 20px;
+    line-height: 20px;
 }
 
 .comment-content{
