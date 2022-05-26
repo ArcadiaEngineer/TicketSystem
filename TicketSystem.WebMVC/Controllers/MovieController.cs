@@ -179,6 +179,13 @@ namespace TicketSystem.WebMVC.Controllers
             return Convert.ToInt32(User.FindFirst("Id")!.Value);
         }
 
+        public PartialViewResult RecentMovies()
+        {
+            var result = _movieService.GetMovieByFilters();
+            List<Movie> movies= result.Data.OrderByDescending(x => x.MovieId).Take(3).ToList();
+           
+            return PartialView(movies);
+        }
 
     }
 }
