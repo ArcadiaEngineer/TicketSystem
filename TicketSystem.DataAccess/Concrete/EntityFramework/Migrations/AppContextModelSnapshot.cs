@@ -164,7 +164,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                         {
                             EmpoyeeId = 1,
                             EmpAddress = "Ankara",
-                            EmpBirthDate = new DateTime(2022, 6, 25, 22, 54, 54, 989, DateTimeKind.Local).AddTicks(8638),
+                            EmpBirthDate = new DateTime(2022, 6, 26, 22, 3, 40, 298, DateTimeKind.Local).AddTicks(1956),
                             EmpEmail = "sncr.@html.com",
                             EmpName = "Ismail",
                             EmpPassword = "Admin",
@@ -314,6 +314,9 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
+
+                    b.Property<int>("SeatId")
+                        .HasColumnType("int");
 
                     b.Property<int>("SessionId")
                         .HasColumnType("int");

@@ -158,7 +158,8 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SessionId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "money", nullable: false)
+                    Price = table.Column<decimal>(type: "money", nullable: false),
+                    SeatId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -190,7 +191,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Migrations
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "EmpoyeeId", "EmpAddress", "EmpBirthDate", "EmpEmail", "EmpName", "EmpPassword", "EmpPhoneNumber", "EmpSurname", "EmpUserName" },
-                values: new object[] { 1, "Ankara", new DateTime(2022, 6, 25, 22, 54, 54, 989, DateTimeKind.Local).AddTicks(8638), "sncr.@html.com", "Ismail", "Admin", "0534543123", "Bal", "Admin" });
+                values: new object[] { 1, "Ankara", new DateTime(2022, 6, 26, 22, 3, 40, 298, DateTimeKind.Local).AddTicks(1956), "sncr.@html.com", "Ismail", "Admin", "0534543123", "Bal", "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Scenes",
