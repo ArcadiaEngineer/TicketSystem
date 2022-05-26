@@ -1,5 +1,5 @@
 ﻿
-@*@model Payment
+@model Ticket
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,7 +26,7 @@
 
     <div class="row">
 
-
+        
         <div class="col-md-8">
             
             <div class="form-group">
@@ -34,27 +34,33 @@
                     <select asp-items="@ViewBag.Seats" id="seats" onchange="showSessionDiv()" class="form-control">
                     </select>
             </div>
-            @using (Html.BeginForm("NewPayment", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                
-                @Html.LabelFor(x => x.CardUserName)
-                @Html.TextBoxFor(x => x.CardUserName, new { @class = "form-control" })
-                <br />
-                @Html.LabelFor(x => x.CardId)
-                @Html.TextBoxFor(x => x.CardId, new { @class = "form-control" })
-                <br />
-               
-        
-                @Html.LabelFor(x => x.CardDueDate)
-                @Html.TextBoxFor(x => x.CardDueDate, new { placeholder = "Due to...", @class = "form-control" })
-                <br />
-                @Html.LabelFor(x => x.CVV)
-                @Html.TextBoxFor(x => x.CVV, new { @class = "form-control" })
-                
-                <br />
-                <button class="btn btn-success">Submit</button>
+             <form asp-action="GetTicketOfSession" method="post" asp-controller="Customer" enctype="multipart/form-data">
 
-            }
+                <div class="form-group mb-3">
+                    <h1 class="fw-light">@ViewBag.Session.MovieName</h1>
+                    
+                    
+                    
+                    
+                </div>
+                <div class="form-group mb-3">
+                   <p class="lead text-muted">@ViewBag.Session.SessionTime</p>
+                </div>
+                <div class="form-group mb-3">
+                    <p class="lead text-muted">@ViewBag.Session.SceneType</p>
+                </div>
+                <div class="form-group mb-3">
+                    <p class="lead text-muted">Your price is 50 TL</p>
+                </div>
+                <input asp-for="@Model.SessionId" type="hidden" class="form-control" value="@ViewBag.Session.SessionId"  />
+                <input asp-for="@Model.CustomerId" type="hidden" class="form-control" value="1" />
+                <input asp-for="@Model.Price" type="hidden" class="form-control" value="50" />
+                <div class="form-group mb-3">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+                
+                
+            </form>
             
             
         </div>
@@ -62,5 +68,5 @@
     </div>
    
 
-</div><!-- /.container -->*@
+</div><!-- /.container -->
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TicketSystem.Business.Abstract;
 using TicketSystem.Entities.Dtos;
+using TicketSystem.Entities.SystemEntities;
 using TicketSystem.WebMVC.Utilities.Extentions;
 
 namespace TicketSystem.WebMVC.Controllers
@@ -78,19 +79,20 @@ namespace TicketSystem.WebMVC.Controllers
         private int FindCustomerId() => Convert.ToInt32(User.FindFirst("Id")!.Value);
 
         [HttpGet]
-        public JsonResult GetSessions(int id)
+        public JsonResult GetSessions(int id, DateTime date)
         {
-            var session = _sessionService.GetSessionDetailAsync(id);
+            var session = _sessionService.GetSessionDetailAsync(id,date);
 
             return Json(session.Data);
         }
+
         [HttpGet]
         public async Task<IActionResult> GetTicketOfSession(int id)
         {
-
+            //https://localhost:7268/Customer/GetTicketOfSession/3
             var session = _sessionService.GetSessionAsync(id);
             var seats = await _seatService.GetBySceneIdAsync(session.Data.SceneId);
-
+            
             if (session.Success)
             {
                 ViewBag.Session = session.Data;
@@ -98,6 +100,25 @@ namespace TicketSystem.WebMVC.Controllers
             if (seats.Success)
             {
                 ViewBag.Seats = new SelectList(seats.Data, "SeatId", "SeatNumber");
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetTicketOfSession(Ticket ticket)
+        {
+
+            if (User.Identity.Name== null)
+            {
+                ticket.CustomerId = 1; 
+            }
+            else
+            {
+                ticket.CustomerId =FindCustomerId();
+            }
+            var t = await _ticketService.CreateAsync(ticket);
+            if (t.Success)
+            {
+                return RedirectToAction("GetAll", "Movie");
             }
             return View();
         }

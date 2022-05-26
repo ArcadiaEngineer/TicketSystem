@@ -9,34 +9,25 @@ function showDiv() {
   var div = document.getElementById("BuyTicketDiv");  
   div.style.display = "block";
 }
-
+$(document).ready(function() {
+			
+			$("#img1").click(function (){
+			  
+		    });
+});
 var sessionId;
 
 function showSessionDiv() {
   var div = document.getElementById("session");
-  var place = document.getElementById("places").value;
-    alert(place);
   div.style.display = "block";
 
-  var date = new Date();
-var day = date.getDate();
-var month = date.getMonth() + 1;
-var year = date.getFullYear();
-
-if (month < 10) month = "0" + month;
-if (day < 10) day = "0" + day;
-
-var today = year + "-" + month + "-" + day;       
-document.getElementById("selectDate").value = today;
-
-   
-          $.get('/Customer/GetSessions/'+ $("#Movieid").text(), function (data) {
-               //create a empty string to append data
+          $.get('/Customer/GetSessions/?id='+ $("#Movieid").text()+'&date='+$("#selectDate").val(), function (data) {
+               //create a empty string to append data?movieName=top&categoyId=2
                var str_2d = "";
                var str_3d = "";
                //loop through data
                $.each(data, function (index, item) {
-                   var hour = item.sessionHour + ":00";
+                   var hour = item.sessionTime + ":00";
                    if (item.sceneType == "Normal") {
                        //get each list item returned value and add it as string
                        str_2d = str_2d + "<a class='btn btn-primary time' href='/Customer/GetTicketOfSession/"+item.sessionId+"'> " + hour + "<i class='fa fa-clock'></i></a>";
@@ -114,7 +105,7 @@ document.getElementById("selectDate").value = today;
                 <h3 class="searchHeader">Select date:</h3>
                 <div class="form-group">
 
-                    <input class="form-control" type="date" id="selectDate" min="2018-04-01" max="2022-04-30" required>
+                    <input class="form-control" type="date" id="selectDate" min="2022-04-01" max="2022-06-30" onchange="showSessionDiv()" required>
                     <span class="validity"></span>
                 </div>
                 

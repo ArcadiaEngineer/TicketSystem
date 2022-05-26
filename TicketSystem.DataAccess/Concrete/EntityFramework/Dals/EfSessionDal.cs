@@ -7,7 +7,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
 {
     public class EfSessionDal : EntityRepositoryBase<Session, AppContext>, ISessionDal
     {
-        public List<SessionDetailDto> GetSessionDetail(int id)
+        public List<SessionDetailDto> GetSessionDetail(int id,DateTime date)
         {
             using (AppContext context = new AppContext())
             {
@@ -16,7 +16,7 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework.Dals
                              on s.MovieId equals m.MovieId
                              join sc in context.Scenes
                              on s.SceneId equals sc.SceneId
-                             where m.MovieId == id
+                             where m.MovieId == id && s.SessionTime.Date==date.Date
                              select new SessionDetailDto
                              {
                                  SessionId = s.SessionId,

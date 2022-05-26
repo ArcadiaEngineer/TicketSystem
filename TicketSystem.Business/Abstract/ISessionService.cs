@@ -8,7 +8,7 @@ namespace TicketSystem.Business.Abstract
     {
         Task<IDataResult<List<Session>>> GetAllSessionsOfMovieAsync(int id);
         Task<IResult> CheckSeat(int sessionId, int seatNumber);
-        IDataResult<List<SessionDetailDto>> GetSessionDetailAsync(int id);
+        IDataResult<List<SessionDetailDto>> GetSessionDetailAsync(int id, DateTime date);
 
         IDataResult<SessionDetailDto> GetSessionAsync(int id);
     }
