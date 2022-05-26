@@ -61,6 +61,9 @@
                         @if (User.IsInRole("Employee"))
                         {
                             <li class="nav-item">
+                                <a class="nav-link" asp-action="AddSession" asp-controller="Movie">Add Session</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" asp-action="Add" asp-controller="Movie">Add Movie</a>
                             </li>
                             <li class="nav-item">

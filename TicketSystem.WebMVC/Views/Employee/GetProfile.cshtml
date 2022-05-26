@@ -1,15 +1,34 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model EmployeeListingDto
-<div class="container my-5">
+﻿
 
-    <h1>Profile</h1>
-    <main role="main" class="pb-3">
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">@Model.EmpUserName</h1>
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model EmployeeListingDto
+
+<div class="section-header">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="page-header">Profile</h1>
+            </div>
+
+        </div>
+    </div> <!-- /.container -->
+</div> <!-- /.section-colored -->
+
+<div class="container container-int">
+
+    <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">Profile</li>
+    </ol>
+    <div class="row">
+       
+        <div class="col-lg-9">
+           <div class="row">
+                <h1 class="fw-light">@Model.EmpUserName</h1>
                     <p class="lead text-muted">Your name is @Model.EmpName</p>
                     <p class="lead text-muted">Your surname is @Model.EmpSurname</p>
                     <p class="lead text-muted">Your phone number is @Model.EmpPhoneNumber</p>
@@ -22,8 +41,8 @@
                     <form method="get" asp-action="AddSession" asp-controller="Employee">
                         <button class="btn btn-outline-secondary" type="submit">Add Session</button>
                     </form>
-                </div>
-            </div>
-        </section>
-    </main>
-</div>
+           </div>     
+        </div>
+    </div>
+
+</div><!-- /.container -->

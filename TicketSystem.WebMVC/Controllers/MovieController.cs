@@ -14,12 +14,16 @@ namespace TicketSystem.WebMVC.Controllers
         IMovieService _movieService;
         IMapper _mapper;
         ICategoryService _categoryService;
+        ISessionService _sessionService;
+        ISceneService _sceneService;
 
-        public MovieController(IMovieService movieService, IMapper mapper, ICategoryService categoryService)
+        public MovieController(IMovieService movieService, IMapper mapper, ICategoryService categoryService, ISessionService sessionService, ISceneService sceneService)
         {
             _movieService = movieService;
             _mapper = mapper;
             _categoryService = categoryService;
+            _sessionService = sessionService;
+            _sceneService = sceneService;
         }
 
         [HttpGet]
@@ -80,7 +84,35 @@ namespace TicketSystem.WebMVC.Controllers
 
             return View(new MovieCreateDto());
         }
+        [Authorize(Roles = "Employee")]
+        [HttpGet]
+        public async Task<IActionResult> AddSession()
+        {
 
+            var list = await _movieService.GetAllAsync();
+            var list2 = await _sceneService.GetAllAsync();
+            if (list.Success && list2.Success)
+            {
+                ViewBag.Movies = new SelectList(list.Data, "MovieId", "MovieName");
+                ViewBag.Scenes = new SelectList(list2.Data, "SceneId", "SceneType");
+            }
+
+            return View(new Session());
+        }
+        [Authorize(Roles = "Employee")]
+        [HttpPost]
+        public async Task<IActionResult> AddSession(Session session)
+        {
+
+            var result = await _sessionService.CreateAsync(session);
+
+            if (result.Success)
+            {
+                return RedirectToAction("GetListMovies");
+            }
+
+            return null;
+        }
         [Authorize(Roles = "Employee")]
         [HttpPost]
         public async Task<IActionResult> Add(MovieCreateDto movieCreateDto, IFormFile formFile)

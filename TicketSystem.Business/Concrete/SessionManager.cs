@@ -86,9 +86,9 @@ namespace TicketSystem.Business.Concrete
             return new ErrorDataResult<SessionDetailDto>();
         }
 
-        public IDataResult<List<SessionDetailDto>> GetSessionDetailAsync(int id)
+        public IDataResult<List<SessionDetailDto>> GetSessionDetailAsync(int id, DateTime date)
         {
-            var session = _seesionDal.GetSessionDetail(id);
+            var session = _seesionDal.GetSessionDetail(id,date);
             if (session != null)
             {
                 return new SuccessDataResult<List<SessionDetailDto>>(session);
