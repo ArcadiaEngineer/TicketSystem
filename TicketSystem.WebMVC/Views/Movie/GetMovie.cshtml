@@ -27,7 +27,8 @@ function showSessionDiv() {
                var str_3d = "";
                //loop through data
                $.each(data, function (index, item) {
-                   var hour = item.sessionTime + ":00";
+                   var hour = item.sessionTime.substr(11, 5);
+                   
                    if (item.sceneType == "Normal") {
                        //get each list item returned value and add it as string
                        str_2d = str_2d + "<a class='btn btn-primary time' href='/Customer/GetTicketOfSession/"+item.sessionId+"'> " + hour + "<i class='fa fa-clock'></i></a>";

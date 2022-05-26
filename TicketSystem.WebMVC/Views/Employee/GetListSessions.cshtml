@@ -4,10 +4,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model List<SessionDetailDto>
-<div class="container">
-    <div class="row mx-0">
-        
-        <div class="col-9 my-3">
+
+
+<div class="section-header">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="page-header">List Session</h1>
+            </div>
+
+        </div>
+    </div> <!-- /.container -->
+</div> <!-- /.section-colored -->
+
+<div class="container container-int">
+
+    <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">List Session</li>
+    </ol>
+    <div class="row">
+       
+        <div class="col-lg-9">
+           <div class="row">
+                    <div class="col-9 my-3">
             <h3>All Sessions</h3>
             <table class="table table-hover table-borderless">
                 <thead class="table-light">
@@ -20,7 +41,7 @@
                         
                         <th scope="col">Update</th>
                         <th scope="col">Delete</th>
-                        <th scope="col">Detail</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -37,12 +58,12 @@
                                 
                                 <td>
                                     <form method="get" asp-action="UpdateSession" asp-controller="Employee" asp-route-id=@item.SessionId>
-                                        <button class="btn btn-outline-info" type="submit">Update Session</button>
+                                        <button class="btn btn-primary" type="submit">Update Session</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form method="post" asp-action="DeleteSession" asp-controller="Employee" asp-route-id=@item.SessionId>
-                                        <button class="btn btn-outline-info" type="submit">Delete</button>
+                                        <button class="btn btn-danger" type="submit">Delete</button>
                                     </form>
                                 </td>
                                 
@@ -52,5 +73,8 @@
                 </tbody>
             </table>
         </div>
+           </div>     
+        </div>
     </div>
-</div>
+
+</div><!-- /.container -->

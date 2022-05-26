@@ -8,7 +8,35 @@
     <main role="main" class="pb-3">
         <div class=col-md-6>
 
-            <form asp-action="Update" method="post" asp-controller="Movie" enctype="multipart/form-data">
+            
+            
+        </div>
+    </main>
+</div>
+
+<div class="section-header">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="page-header">Update Movie</h1>
+            </div>
+
+        </div>
+    </div> <!-- /.container -->
+</div> <!-- /.section-colored -->
+
+<div class="container container-int">
+
+    <ol class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li class="active">Update Movie</li>
+    </ol>
+    <div class="row">
+       
+        <div class="col-lg-9">
+           <div class="row">
+                    <form asp-action="Update" method="post" asp-controller="Movie" enctype="multipart/form-data">
 
                 <div class="form-group mb-3">
                     <input asp-for="@Model.MovieId" class="form-control" type="hidden"   />
@@ -54,7 +82,9 @@
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
-            
+           </div>     
         </div>
-    </main>
-</div>
+    </div>
+
+</div><!-- /.container -->
+

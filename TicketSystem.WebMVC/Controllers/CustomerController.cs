@@ -82,7 +82,7 @@ namespace TicketSystem.WebMVC.Controllers
         public JsonResult GetSessions(int id, DateTime date)
         {
             var session = _sessionService.GetSessionDetailAsync(id,date);
-
+            
             return Json(session.Data);
         }
 
