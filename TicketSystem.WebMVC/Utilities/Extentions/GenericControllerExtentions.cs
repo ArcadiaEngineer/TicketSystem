@@ -19,5 +19,7 @@ namespace TicketSystem.WebMVC.Utilities.Extentions
             return controller.Content(dataResult.Message);
         }
 
+        
+
     }
 }

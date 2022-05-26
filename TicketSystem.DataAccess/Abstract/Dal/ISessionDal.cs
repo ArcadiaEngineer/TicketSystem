@@ -8,5 +8,6 @@ namespace TicketSystem.DataAccess.Abstract.Dal
     {
         List<SessionDetailDto> GetSessionDetail(int id, DateTime date);
         SessionDetailDto GetSession(int id);
+        List<SessionDetailDto> GetListSessions();
     }
 }

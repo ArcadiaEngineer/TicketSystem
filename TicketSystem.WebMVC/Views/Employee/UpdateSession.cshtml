@@ -1,0 +1,38 @@
+﻿
+@model Session
+<div class="container">
+
+    <h1>Update Session</h1>
+    <main role="main" class="pb-3">
+        <div class=col-md-6>
+
+            <form asp-action="UpdateSession" method="post" asp-controller="Employee" enctype="multipart/form-data">
+
+                <div class="form-group mb-3">
+                    <input asp-for="@Model.SessionId" class="form-control" type="hidden"   />
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="@Model.SessionTime"></label>
+                    <input asp-for="@Model.SessionTime" class="form-control" />
+                    <span asp-validation-for="@Model.SessionTime" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label>Movies :</label>
+                    <select asp-for="@Model.MovieId" asp-items="@ViewBag.Movies" class="form-control">
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Scenes :</label>
+                    <select asp-for="@Model.SceneId" asp-items="@ViewBag.Scenes" class="form-control">
+                    </select>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+            
+        </div>
+    </main>
+</div>

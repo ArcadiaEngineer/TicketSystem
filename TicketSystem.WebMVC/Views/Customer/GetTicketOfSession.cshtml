@@ -29,13 +29,13 @@
         
         <div class="col-md-8">
             
-            <div class="form-group">
-                     <h3 >Select Seat:</h3>
-                    <select asp-items="@ViewBag.Seats" id="seats" onchange="showSessionDiv()" class="form-control">
-                    </select>
-            </div>
+            
              <form asp-action="GetTicketOfSession" method="post" asp-controller="Customer" enctype="multipart/form-data">
-
+                <div class="form-group">
+                     <h3 >Select Seat:</h3>
+                    <select asp-items="@ViewBag.Seats" asp-for="@Model.SeatId" id="seats" onchange="showSessionDiv()" class="form-control">
+                    </select>
+                </div>
                 <div class="form-group mb-3">
                     <h1 class="fw-light">@ViewBag.Session.MovieName</h1>
                     
@@ -44,13 +44,13 @@
                     
                 </div>
                 <div class="form-group mb-3">
-                   <p class="lead text-muted">@ViewBag.Session.SessionTime</p>
+                   <p class="lead text-muted">Your Session time: @ViewBag.Session.SessionTime</p>
                 </div>
                 <div class="form-group mb-3">
-                    <p class="lead text-muted">@ViewBag.Session.SceneType</p>
+                    <p class="lead text-muted">Your Scene: @ViewBag.Session.SceneType</p>
                 </div>
                 <div class="form-group mb-3">
-                    <p class="lead text-muted">Your price is 50 TL</p>
+                    <p class="lead text-muted">Your ticket price is 50 TL</p>
                 </div>
                 <input asp-for="@Model.SessionId" type="hidden" class="form-control" value="@ViewBag.Session.SessionId"  />
                 <input asp-for="@Model.CustomerId" type="hidden" class="form-control" value="1" />

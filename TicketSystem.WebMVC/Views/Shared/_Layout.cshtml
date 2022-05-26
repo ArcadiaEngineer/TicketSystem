@@ -60,15 +60,34 @@
                     {
                         @if (User.IsInRole("Employee"))
                         {
+                            
                             <li class="nav-item">
-                                <a class="nav-link" asp-action="AddSession" asp-controller="Movie">Add Session</a>
+                                <a class="nav-link" asp-action="AddSeat" asp-controller="Employee">Add Seat</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Session <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-action="AddSession" asp-controller="Employee">Add Session</a>
+                                    </li> 
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-action="GetListSessions" asp-controller="Employee">Update Sessions</a>
+                                    </li> 
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Movie <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu">
+                                 <li class="nav-item">
                                 <a class="nav-link" asp-action="Add" asp-controller="Movie">Add Movie</a>
-                            </li>
+                                </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-action="GetListMovies" asp-controller="Movie">Set Movies</a>
+                                <a class="nav-link" asp-action="GetListMovies" asp-controller="Movie">Update Movies</a>
                             </li>
+                                </ul>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" asp-action="GetProfile" asp-controller="Employee">Profile</a>
                             </li>
