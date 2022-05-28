@@ -67,7 +67,7 @@ namespace TicketSystem.WebMVC.Controllers
 
             if (result.Success)
             {
-                return RedirectToAction("GetAll", "Movie");
+                return RedirectToAction("GetListSessions", "Employee");
             }
 
             return View("AddSession");

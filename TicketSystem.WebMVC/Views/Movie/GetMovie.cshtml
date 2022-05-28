@@ -8,45 +8,52 @@
 function showDiv() {
   var div = document.getElementById("BuyTicketDiv");  
   div.style.display = "block";
+
+  
 }
-$(document).ready(function() {
-			
-			$("#img1").click(function (){
-			  
-		    });
-});
-var sessionId;
 
-function showSessionDiv() {
-  var div = document.getElementById("session");
-  div.style.display = "block";
 
-          $.get('/Customer/GetSessions/?id='+ $("#Movieid").text()+'&date='+$("#selectDate").val(), function (data) {
-               //create a empty string to append data?movieName=top&categoyId=2
-               var str_2d = "";
-               var str_3d = "";
-               //loop through data
-               $.each(data, function (index, item) {
-                   var hour = item.sessionTime.substr(11, 5);
-                   
-                   if (item.sceneType == "Normal") {
-                       //get each list item returned value and add it as string
-                       str_2d = str_2d + "<a class='btn btn-primary time' href='/Customer/GetTicketOfSession/"+item.sessionId+"'> " + hour + "<i class='fa fa-clock'></i></a>";
+
+function fill_sessions(sessions)
+{
+        var str_2d = "";
+        var str_3d = "";
+
+        sessions.forEach(function (session) {
+    
+            console.log(session.sessionId); //sessionId console' a yazdırma
+            var hour = session.sessionTime.substr(11, 5);
+            if (session.sceneType == "Normal") 
+            {
+                //get each list item returned value and add it as string
                        
-                   }
-                   else {
-                       str_3d = str_3d + "<a class='btn btn-primary time' href='/Customer/GetTicketOfSession/"+item.sessionId+"'> " + hour + "</a>";
-                   }
-                   
-               });
+                str_2d = str_2d + "<a class='btn btn-primary time' href='/Customer/GetTicketOfSession/"+session.sessionId+"'>" + hour + "<i class='fa fa-clock'></i></a>";
+                       
+            }
+            else 
+            {
+               str_3d = str_3d + "<a class='btn btn-primary time' href='/Customer/GetTicketOfSession/"+session.sessionId+"'>" + hour + "<i class='fa fa-clock'></i></a>";
+            }
+        });
 
-              
-               //append item in Table body to 
-               $("#panel-session-2d").html(str_2d);
-                $("#panel-session-3d").html(str_3d);
-           });
+               
+        document.getElementById("panel-session-2d").innerHTML =str_2d;
+        document.getElementById("panel-session-3d").innerHTML =str_3d;
+}
 
- 
+function getValues()
+{
+    var div2 = document.getElementById("session");
+    div2.style.display = "block";
+
+    const idToGet=document.getElementById("Movieid").innerText;
+    const dateToGet=document.getElementById("selectDate").value;
+
+    var url='/Customer/GetSessions/?id='+idToGet+'&date='+dateToGet;
+    
+    fetch(url)
+    .then((response)=> response.json())//parse Json data
+    .then((sessions)=> fill_sessions(sessions))
 }
 
 </script>
@@ -106,7 +113,7 @@ function showSessionDiv() {
                 <h3 class="searchHeader">Select date:</h3>
                 <div class="form-group">
 
-                    <input class="form-control" type="date" id="selectDate" min="2022-04-01" max="2022-06-30" onchange="showSessionDiv()" required>
+                    <input class="form-control" type="date" id="selectDate" min="2022-04-01" max="2022-06-30" onchange="getValues()" required>
                     <span class="validity"></span>
                 </div>
                 
