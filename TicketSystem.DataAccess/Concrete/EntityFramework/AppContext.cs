@@ -8,7 +8,8 @@ namespace TicketSystem.DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=TicketSystem;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=TicketSystem;User ID = sa; Password =Ankara06!;");
+            
 
             base.OnConfiguring(optionsBuilder);
         }
