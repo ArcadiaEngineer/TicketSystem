@@ -19,11 +19,21 @@
                             </small>
                         </div><!-- /.overlay-portfolio -->
                         @{
-                        var base64 = Convert.ToBase64String(item.MovieBanner!);
-                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                    }
-                        <img class="img-responsive img-home-portfolio" src="@imgSrc"
-                             style="height:300px;width:250px" >
+                            if(item.MovieBanner!=null)
+                            {
+                               var base64 = Convert.ToBase64String(item.MovieBanner!);
+                               var imgSrc = String.Format("data:image/gif;base64,{0}", base64); 
+                               <img class="img-responsive img-home-portfolio" src="@imgSrc"
+                               style="height:300px;width:250px" >
+                            }
+                            else
+                            {
+                                <img class="img-responsive img-home-portfolio" src="/images/no-image.jpg"
+                               style="height:300px;width:250px" >
+                            }
+
+                        }
+                        
                     </a>
                 </div>
 

@@ -68,10 +68,7 @@ $("form").find(":input").prop("disabled", false);
             @foreach (var item in Model)
             {
                 <div class="col-md-4 col-sm-4 portfolio-item">
-                    @{
-                        var base64 = Convert.ToBase64String(item.MovieBanner!);
-                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                    }
+                   
                     <a href="/Movie/GetMovie/@item.MovieId" class="link-portfolio">
                         <div class="overlay-portfolio">
                             <h3>@item.MovieName</h3>
@@ -82,7 +79,18 @@ $("form").find(":input").prop("disabled", false);
                             </small>
                             <h4>Click for Buy</h4>
                         </div><!-- /.overlay-portfolio -->
-                        <img class="img-responsive img-home-portfolio" src="@imgSrc" alt="movie">
+                        @if(item.MovieBanner!=null)
+                        {
+                            var base64 = Convert.ToBase64String(@item.MovieBanner!);
+                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64); 
+                            <img class="img-responsive img-home-portfolio" src="@imgSrc" alt="movie">
+                        }
+                        else
+                        {
+                            <img class="img-responsive img-home-portfolio" src="/images/no-image.jpg" alt="movie">
+                    
+                        }
+                            
                         
                     </a>
                 </div>

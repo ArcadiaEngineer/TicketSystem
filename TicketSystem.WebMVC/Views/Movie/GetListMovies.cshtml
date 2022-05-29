@@ -60,11 +60,17 @@
                                 <td>@item.MovieAgeLimit</td>
                                 <td>@item.MovieName</td>
                                 <td>@item.MovieIMDB</td>
-                                @{
-                                    var base64 = Convert.ToBase64String(item.MovieBanner!);
-                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                @if(item.MovieBanner!=null)
+                                {
+                                    var base64 = Convert.ToBase64String(@item.MovieBanner!);
+                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64); 
+                                    <td><img src="@imgSrc" width="80" height="80"></td>
                                 }
-                                <td><img src="@imgSrc" width="80" height="80"></td>
+                                else
+                                {
+                                    <td><img src="/images/no-image.jpg" width="80" height="80"></td>
+                                }
+                                
                                 <td>
                                     <form method="get" asp-action="Update" asp-controller="Movie" asp-route-id=@item.MovieId>
                                         <button class="btn btn-primary" type="submit">Update Movie</button>

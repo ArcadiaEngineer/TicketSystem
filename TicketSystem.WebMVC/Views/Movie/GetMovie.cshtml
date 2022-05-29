@@ -81,14 +81,21 @@ function getValues()
 
 
         <div class="col-md-4">
-            @{
-                var base64 = Convert.ToBase64String(Model.MovieBanner!);
-                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-             }
-                                
-            <div class="pro-img-details">
-                <img id="large-image" class="img-responsive" src="@imgSrc" alt="Portfolio 1">
-            </div>
+           
+             @if(Model.MovieBanner!=null)
+             {
+                 var base64 = Convert.ToBase64String(@Model.MovieBanner!);
+                 var imgSrc = String.Format("data:image/gif;base64,{0}", base64); 
+                 <img class="img-responsive img-home-portfolio" src="@imgSrc"
+                 style="height:300px;width:250px" >
+              }
+              else
+              {
+                <img class="img-responsive img-home-portfolio" src="/images/no-image.jpg"
+                 style="height:300px;width:250px" >
+              }
+
+            
 
         </div>
 
