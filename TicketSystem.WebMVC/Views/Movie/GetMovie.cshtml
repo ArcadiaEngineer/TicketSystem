@@ -107,7 +107,10 @@ function getValues()
             <h3><small>Vision Date</small></h3>
             <p><small>@Model.MovieVisionDate</small></p>
             <h3>Review</h3>
-            <p class="text-justify">@Model.MovieReview</p>
+            @if (Model.MovieReview != null)
+            {
+                <p class="text-justify">@Model.MovieReview</p>
+            }
             <a class="btn btn-primary"  onclick="showDiv()">Buy <i class="fa fa-angle-right"></i></a>
             
         </div>

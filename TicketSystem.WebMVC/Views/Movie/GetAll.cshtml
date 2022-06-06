@@ -73,11 +73,13 @@ $("form").find(":input").prop("disabled", false);
                         <div class="overlay-portfolio">
                             <h3>@item.MovieName</h3>
                             <h4>@(((DateTime)item.MovieVisionDate).ToString("dd-MMM-yyyy"))</h4>
-                            
-                            <small class="text-muted">
-                                @item.MovieReview.Substring(0,item.MovieReview.Substring(0,130).LastIndexOf(" ")) ...
-                            </small>
-                            <h4>Click for Buy</h4>
+                            @if (item.MovieReview != null)
+                            {
+                                    <small class="text-muted">
+                                        @item.MovieReview.Substring(0,item.MovieReview.Substring(0,130).LastIndexOf(" ")) ...
+                                    </small>
+                            }
+                                <h4>Click for Buy</h4>
                         </div><!-- /.overlay-portfolio -->
                         @if(item.MovieBanner!=null)
                         {

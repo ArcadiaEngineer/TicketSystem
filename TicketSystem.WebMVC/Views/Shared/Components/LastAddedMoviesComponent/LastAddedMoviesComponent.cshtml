@@ -52,7 +52,10 @@
                     {
                         <small class="fw-light">The movie @(((Model[i].MovieVisionDate - DateTime.Now).Days)*(-1)) ago begun the play</small>
                     }
-                    <p class="mb-1">@Model[i].MovieReview</p>
+                    @if (Model[i].MovieReview != null)
+                    {
+                        <p class="mb-1">@Model[i].MovieReview</p>
+                    }
                     <small>Release date of the film @Model[i].MovieReleaseTime.ToString()</small>
                     <br />
                     <small>Vision date of the fim @Model[i].MovieVisionDate.ToString()</small>

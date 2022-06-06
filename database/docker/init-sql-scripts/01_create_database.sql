@@ -5,9 +5,9 @@ GO
 CREATE DATABASE [TicketSystem]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'TicketSystem', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\TicketSystem.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+( NAME = N'TicketSystem', FILENAME = N'/var/opt/mssql/data/TicketSystem.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
  LOG ON 
-( NAME = N'TicketSystem_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\TicketSystem_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+( NAME = N'TicketSystem_log', FILENAME = N'/var/opt/mssql/data/TicketSystem_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
  WITH CATALOG_COLLATION = DATABASE_DEFAULT
 GO
 
@@ -112,5 +112,4 @@ GO
 
 ALTER DATABASE [TicketSystem] SET  READ_WRITE 
 GO
-
 
