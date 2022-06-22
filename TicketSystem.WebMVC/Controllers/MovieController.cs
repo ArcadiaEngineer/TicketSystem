@@ -32,6 +32,7 @@ namespace TicketSystem.WebMVC.Controllers
 
             var categories = await _categoryService.GetAllAsync();
             ViewBag.MovieName = movieName;
+           
             if (categories.Success)
             {
                 ViewBag.Categories = categories.Data;
@@ -51,18 +52,7 @@ namespace TicketSystem.WebMVC.Controllers
             return View(result.Data);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> GetMoviesByFiltered(int[] categorys, int cinemaId)
-        //{
-        //    var result = await _movieService.GetAllAsync();
-        //    List<Movie> filteredList = result.Data;
-
-        //    var moviesFiltered = (from n in filteredList
-        //                          where n.MovieCategoryId.Equals(categorys)
-        //                          select n).ToList();
-
-        //    return this.List<MovieListingDto, Movie>(moviesFiltered, _mapper);
-        //}
+       
 
         [Authorize(Roles = "Employee")]
         [HttpGet]

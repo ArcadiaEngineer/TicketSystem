@@ -118,35 +118,11 @@ namespace TicketSystem.WebMVC.Controllers
             var t = await _ticketService.CreateAsync(ticket);
             if (t.Success)
             {
+                TempData["SuccessMessage"] = "You have successfully purchased your ticket!";
                 return RedirectToAction("GetAll", "Movie");
             }
             return View();
         }
-        //    [HttpPost]
-        //    public async Task<IActionResult> NewPayment(Payment payment)
-        //    {
-        //        payment.CustomerId = 2;
-        //        payment.EInvoice = "1";
-
-
-
-        //        var result = await _paymentService.CreateAsync(payment);
-        //        if (result.Success)
-        //        {
-        //            Ticket t = new Ticket();
-        //            t.SessionId = 1;
-        //            t.CustomerId = payment.CustomerId;
-        //            t.Price = 100;
-
-        //            var ticket = await _ticketService.CreateAsync(t);
-        //            if (ticket.Success)
-        //            {
-        //                return RedirectToAction("GetAll", "Movie");
-        //            }
-        //        }
-
-
-        //        return null;
-        //    }
+       
     }
 }
